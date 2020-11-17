@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE uzivatel (
-    email VARCHAR(254) NOT NULL,
+    email VARCHAR(254) PRIMARY KEY,
     heslo VARCHAR(255) NOT NULL,
     bio VARCHAR(5000)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
@@ -40,7 +40,7 @@ CREATE TABLE uzivatel (
 --
 
 CREATE TABLE skupina (
-    nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
+    nazev VARCHAR(255) PRIMARY KEY COLLATE utf8_czech_ci,
     popis VARCHAR(10000) COLLATE utf8_czech_ci,
     ikona BLOB
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
@@ -50,7 +50,7 @@ CREATE TABLE skupina (
 --
 
 CREATE TABLE vlakno (
-    id INT UNSIGNED NOT NULL,
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
     popis VARCHAR(10000) COLLATE utf8_czech_ci,
     stav BOOL NOT NULL # vyrizeno / nevyrizeno
@@ -61,7 +61,7 @@ CREATE TABLE vlakno (
 --
 
 CREATE TABLE prispevek (
-    id INT UNSIGNED NOT NULL,
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     karma INT NOT NULL,
     text VARCHAR(10000) NOT NULL COLLATE utf8_czech_ci
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
@@ -71,7 +71,7 @@ CREATE TABLE prispevek (
 --
 
 CREATE TABLE zadost (
-    id INT UNSIGNED NOT NULL,
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     typ TINYINT(1) UNSIGNED NOT NULL, # BOOLEAN
     text VARCHAR(2000) COLLATE utf8_czech_ci,
     stav TINYINT(1) UNSIGNED NOT NULL # BOOLEAN
