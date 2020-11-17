@@ -63,7 +63,7 @@ CREATE TABLE vlakno (
 CREATE TABLE prispevek (
     id INT UNSIGNED NOT NULL,
     karma INT NOT NULL,
-    text VARCHAR(10000) NOT NULL COLLATE utf8_czech_ci,
+    text VARCHAR(10000) NOT NULL COLLATE utf8_czech_ci
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 --
