@@ -10,6 +10,13 @@
 *  PHP version: 7.4.12
 */
 
+-- Notes:
+-- foreign keys are made without FOREIGN KEY constraint
+-- foreign key in 1:1 or 1:n relationships is always named same as relationship name
+-- additional tables for n:n relationships are always named same as relationship name
+-- foreign keys in additional tables are always named same as parent table's primary key
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -42,7 +49,12 @@ CREATE TABLE uzivatel (
 CREATE TABLE skupina (
     nazev VARCHAR(255) PRIMARY KEY COLLATE utf8_czech_ci,
     popis VARCHAR(10000) COLLATE utf8_czech_ci,
-    ikona BLOB
+    ikona BLOB,
+    zabezpeceni_profilu BOOL NOT NULL, # 0 -> private, 1 -> public
+    zabezpeceni_obsahu BOOL NOT NULL, # 0 -> private, 1 -> public
+
+    -- foreign keys --
+    spravce VARCHAR(254) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 --
@@ -53,7 +65,12 @@ CREATE TABLE vlakno (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
     popis VARCHAR(10000) COLLATE utf8_czech_ci,
-    stav BOOL NOT NULL # vyrizeno / nevyrizeno
+    stav TINYINT(2) NOT NULL, # awaiting approval / approved / not approved
+
+    -- foreign keys --
+    soucast VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
+    pripnute_vlakno BOOL NOT NULL, # not FG, 0 -> unpinned, 1 -> pinned
+    zakladatel VARCHAR(254) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 --
@@ -63,7 +80,13 @@ CREATE TABLE vlakno (
 CREATE TABLE prispevek (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     karma INT NOT NULL,
-    text VARCHAR(10000) NOT NULL COLLATE utf8_czech_ci
+    text VARCHAR(10000) NOT NULL COLLATE utf8_czech_ci,
+
+    -- foreign keys --
+    soucast INT UNSIGNED NOT NULL,
+    odpoved INT UNSIGNED,
+    ma_odpovede BOOL NOT NULL, # not FG, 0 -> without, 1 -> with
+    prispevatel VARCHAR(254) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 --
@@ -74,31 +97,50 @@ CREATE TABLE zadost (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     typ TINYINT(1) UNSIGNED NOT NULL, # BOOLEAN
     text VARCHAR(2000) COLLATE utf8_czech_ci,
-    stav TINYINT(1) UNSIGNED NOT NULL # BOOLEAN
+    stav TINYINT(1) UNSIGNED NOT NULL, # BOOLEAN
+
+    -- foreign keys --
+    od VARCHAR(254) NOT NULL,
+    do VARCHAR(255) NOT NULL COLLATE utf8_czech_ci
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
-/*
 --
--- Klíče pro exportované tabulky
---
-
---
--- Klíče pro tabulku `accounts`
---
-ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `login` (`login`);
-
---
--- AUTO_INCREMENT pro tabulky
+-- Table "moderator" structure for moderator relationship
 --
 
+CREATE TABLE moderator (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+    -- foreign keys --
+    email VARCHAR(254) NOT NULL,
+    nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
+
 --
--- AUTO_INCREMENT pro tabulku `accounts`
+-- Table "clen" structure for clen relationship
 --
-ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-*/
+
+CREATE TABLE clen (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+
+    -- foreign keys --
+    email VARCHAR(254) NOT NULL,
+    nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
+
+--
+-- Table "hodnotil" structure for hodnotil relationship
+-- Without primary key
+--
+
+CREATE TABLE hodnotil (
+    hodnotil BOOL NOT NULL, # 0 -> dislike, 1 -> like
+
+    -- foreign keys --
+    email VARCHAR(254) NOT NULL,
+    id INT UNSIGNED NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
