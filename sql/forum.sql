@@ -54,7 +54,10 @@ CREATE TABLE skupina (
     zabezpeceni_obsahu BOOL NOT NULL, # 0 -> private, 1 -> public
 
     -- foreign keys --
-    spravce VARCHAR(254) NOT NULL
+    spravce VARCHAR(254) NOT NULL,
+
+    -- checks --
+    CONSTRAINT nazev_longer_than_two_characters CHECK ( length(nazev) > 2 )
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 --
@@ -65,12 +68,15 @@ CREATE TABLE vlakno (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
     popis VARCHAR(10000) COLLATE utf8_czech_ci,
-    stav TINYINT(2) NOT NULL, # awaiting approval / approved / not approved
+    stav BOOL NOT NULL, # 0 -> unsolved, 1 -> solved
 
     -- foreign keys --
     soucast VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
     pripnute_vlakno BOOL NOT NULL, # not FG, 0 -> unpinned, 1 -> pinned
-    zakladatel VARCHAR(254) NOT NULL
+    zakladatel VARCHAR(254) NOT NULL,
+
+    -- checks --
+    CONSTRAINT nazev_longer_than_two_characters CHECK ( length(nazev) > 2 )
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 --
@@ -97,7 +103,7 @@ CREATE TABLE zadost (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     typ TINYINT(1) UNSIGNED NOT NULL, # BOOLEAN
     text VARCHAR(2000) COLLATE utf8_czech_ci,
-    stav TINYINT(1) UNSIGNED NOT NULL, # BOOLEAN
+    stav TINYINT(2) UNSIGNED NOT NULL, # awaiting approval / approved / not approved
 
     -- foreign keys --
     od VARCHAR(254) NOT NULL,
