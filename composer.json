@@ -1,0 +1,15 @@
+{
+  "name": "vendor_name/iis",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Kubam",
+      "email": "email@example.com"
+    }
+  ],
+  "require-dev": {
+    "barryvdh/laravel-ide-helper": "^2.8"
+  }
+}
