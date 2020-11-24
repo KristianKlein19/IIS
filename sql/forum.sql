@@ -37,8 +37,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE uzivatel (
-    email VARCHAR(254) PRIMARY KEY,
-    heslo VARCHAR(255) NOT NULL,
+    nick VARCHAR(32) PRIMARY KEY,
+    email VARCHAR(320) NOT NULL UNIQUE,
+    heslo BINARY(32) NOT NULL,
     bio VARCHAR(5000)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
@@ -52,9 +53,10 @@ CREATE TABLE skupina (
     ikona BLOB,
     zabezpeceni_profilu BOOL NOT NULL, # 0 -> private, 1 -> public
     zabezpeceni_obsahu BOOL NOT NULL, # 0 -> private, 1 -> public
+    spravce VARCHAR(32) NOT NULL,
 
     -- foreign keys --
-    spravce VARCHAR(254) NOT NULL,
+    FOREIGN KEY (spravce) REFERENCES uzivatel(nick),
 
     -- checks --
     CONSTRAINT nazev_longer_than_two_characters CHECK ( length(nazev) > 2 )
@@ -69,11 +71,13 @@ CREATE TABLE vlakno (
     nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
     popis VARCHAR(10000) COLLATE utf8_czech_ci,
     stav BOOL NOT NULL, # 0 -> unsolved, 1 -> solved
-
-    -- foreign keys --
     soucast VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
     pripnute_vlakno BOOL NOT NULL, # not FG, 0 -> unpinned, 1 -> pinned
-    zakladatel VARCHAR(254) NOT NULL,
+    zakladatel VARCHAR(32) NOT NULL,
+
+    -- foreign keys --
+    FOREIGN KEY (soucast) REFERENCES skupina(nazev),
+    FOREIGN KEY (zakladatel) REFERENCES uzivatel(nick),
 
     -- checks --
     CONSTRAINT nazev_longer_than_two_characters CHECK ( length(nazev) > 2 )
@@ -87,12 +91,14 @@ CREATE TABLE prispevek (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     karma INT NOT NULL,
     text VARCHAR(10000) NOT NULL COLLATE utf8_czech_ci,
-
-    -- foreign keys --
     soucast INT UNSIGNED NOT NULL,
     odpoved INT UNSIGNED,
-    ma_odpovede BOOL NOT NULL, # not FG, 0 -> without, 1 -> with
-    prispevatel VARCHAR(254) NOT NULL
+    prispevatel VARCHAR(32) NOT NULL,
+
+    -- foreign keys --
+    FOREIGN KEY (soucast) REFERENCES vlakno(id),
+    FOREIGN KEY (odpoved) REFERENCES prispevek(id),
+    FOREIGN KEY (prispevatel) REFERENCES uzivatel(nick)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 --
@@ -104,10 +110,12 @@ CREATE TABLE zadost (
     typ TINYINT(1) UNSIGNED NOT NULL, # BOOLEAN
     text VARCHAR(2000) COLLATE utf8_czech_ci,
     stav TINYINT(2) UNSIGNED NOT NULL, # awaiting approval / approved / not approved
+    od VARCHAR(32) NOT NULL,
+    do VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
 
     -- foreign keys --
-    od VARCHAR(254) NOT NULL,
-    do VARCHAR(255) NOT NULL COLLATE utf8_czech_ci
+    FOREIGN KEY (od) REFERENCES uzivatel(nick),
+    FOREIGN KEY (do) REFERENCES skupina(nazev)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 --
@@ -115,11 +123,11 @@ CREATE TABLE zadost (
 --
 
 CREATE TABLE moderator (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-
-    -- foreign keys --
-    email VARCHAR(254) NOT NULL,
-    nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci
+    nick VARCHAR(32) NOT NULL,
+    nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
+    FOREIGN KEY (nick) REFERENCES uzivatel(nick),
+    FOREIGN KEY (nazev) REFERENCES skupina(nazev),
+    PRIMARY KEY (nick, nazev)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 --
@@ -127,11 +135,11 @@ CREATE TABLE moderator (
 --
 
 CREATE TABLE clen (
-    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-
-    -- foreign keys --
-    email VARCHAR(254) NOT NULL,
-    nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci
+    nick VARCHAR(32) NOT NULL,
+    nazev VARCHAR(255) NOT NULL COLLATE utf8_czech_ci,
+    FOREIGN KEY (nick) REFERENCES uzivatel(nick),
+    FOREIGN KEY (nazev) REFERENCES skupina(nazev),
+    PRIMARY KEY (nick, nazev)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 --
@@ -140,12 +148,13 @@ CREATE TABLE clen (
 --
 
 CREATE TABLE hodnotil (
+    nick VARCHAR(32) NOT NULL,
+    id INT UNSIGNED NOT NULL,
     hodnotil BOOL NOT NULL, # 0 -> dislike, 1 -> like
-
-    -- foreign keys --
-    email VARCHAR(254) NOT NULL,
-    id INT UNSIGNED NOT NULL
-) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+    FOREIGN KEY (nick) REFERENCES uzivatel(nick),
+    FOREIGN KEY (id) REFERENCES prispevek(id),
+    PRIMARY KEY (nick, id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COLLATE = utf8_czech_ci;
 
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
