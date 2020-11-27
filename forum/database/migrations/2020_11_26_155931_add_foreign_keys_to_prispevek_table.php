@@ -16,7 +16,7 @@ class AddForeignKeysToPrispevekTable extends Migration
         Schema::table('prispevek', function (Blueprint $table) {
             $table->foreign('soucast', 'prispevek_ibfk_1')->references('id')->on('vlakno')->onUpdate('RESTRICT')->onDelete('RESTRICT');
             $table->foreign('odpoved', 'prispevek_ibfk_2')->references('id')->on('prispevek')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('prispevatel', 'prispevek_ibfk_3')->references('nick')->on('uzivatel')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('prispevatel', 'prispevek_ibfk_3')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }
 

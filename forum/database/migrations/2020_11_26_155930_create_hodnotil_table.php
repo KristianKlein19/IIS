@@ -14,10 +14,12 @@ class CreateHodnotilTable extends Migration
     public function up()
     {
         Schema::create('hodnotil', function (Blueprint $table) {
-            $table->string('nick', 32);
-            $table->unsignedInteger('id')->index('id');
+            $table->id();
+            $table->unsignedBigInteger('id_users')->index('id_users'); // foreign key
+            $table->unsignedBigInteger('id_prispevek')->index('id_prispevek'); // foreign key
             $table->tinyInteger('hodnotil');
-            $table->primary(['nick', 'id']);
+            $table->timestamps();
+            $table->unique(['id_users', 'id_prispevek']);
         });
     }
 

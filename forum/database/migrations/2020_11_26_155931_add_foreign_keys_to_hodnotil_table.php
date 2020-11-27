@@ -14,8 +14,8 @@ class AddForeignKeysToHodnotilTable extends Migration
     public function up()
     {
         Schema::table('hodnotil', function (Blueprint $table) {
-            $table->foreign('nick', 'hodnotil_ibfk_1')->references('nick')->on('uzivatel')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('id', 'hodnotil_ibfk_2')->references('id')->on('prispevek')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('id_users', 'hodnotil_ibfk_1')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('id_prispevek', 'hodnotil_ibfk_2')->references('id')->on('prispevek')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }
 

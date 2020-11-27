@@ -14,8 +14,8 @@ class AddForeignKeysToClenTable extends Migration
     public function up()
     {
         Schema::table('clen', function (Blueprint $table) {
-            $table->foreign('nick', 'clen_ibfk_1')->references('nick')->on('uzivatel')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('nazev', 'clen_ibfk_2')->references('nazev')->on('skupina')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('id_users', 'clen_ibfk_1')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('id_skupina', 'clen_ibfk_2')->references('id')->on('skupina')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }
 
