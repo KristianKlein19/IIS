@@ -14,13 +14,14 @@ class CreateVlaknoTable extends Migration
     public function up()
     {
         Schema::create('vlakno', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('nazev');
             $table->string('popis', 10000)->nullable();
             $table->tinyInteger('stav');
-            $table->string('soucast')->index('soucast');
             $table->tinyInteger('pripnute_vlakno');
-            $table->string('zakladatel', 32)->index('zakladatel');
+            $table->unsignedBigInteger('soucast')->index('soucast'); // foreign key
+            $table->unsignedBigInteger('zakladatel')->index('zakladatel'); // foreign key
+            $table->timestamps();
         });
     }
 

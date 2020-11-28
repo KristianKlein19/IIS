@@ -14,12 +14,13 @@ class CreateSkupinaTable extends Migration
     public function up()
     {
         Schema::create('skupina', function (Blueprint $table) {
-            $table->string('nazev')->primary();
+            $table->id();
+            $table->string('nazev');
             $table->string('popis', 10000)->nullable();
-            $table->binary('ikona')->nullable();
             $table->tinyInteger('zabezpeceni_profilu');
             $table->tinyInteger('zabezpeceni_obsahu');
-            $table->string('spravce', 32)->index('spravce');
+            $table->unsignedBigInteger('spravce')->index('spravce'); // foreign key
+            $table->timestamps();
         });
     }
 

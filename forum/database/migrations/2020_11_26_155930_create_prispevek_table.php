@@ -14,12 +14,13 @@ class CreatePrispevekTable extends Migration
     public function up()
     {
         Schema::create('prispevek', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->integer('karma');
             $table->string('text', 10000);
-            $table->unsignedInteger('soucast')->index('soucast');
-            $table->unsignedInteger('odpoved')->nullable()->index('odpoved');
-            $table->string('prispevatel', 32)->index('prispevatel');
+            $table->unsignedBigInteger('soucast')->index('soucast'); // foreign key
+            $table->unsignedBigInteger('odpoved')->nullable()->index('odpoved'); // foreign key
+            $table->unsignedBigInteger('prispevatel')->index('prispevatel'); // foreign key
+            $table->timestamps();
         });
     }
 

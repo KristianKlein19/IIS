@@ -14,9 +14,11 @@ class CreateClenTable extends Migration
     public function up()
     {
         Schema::create('clen', function (Blueprint $table) {
-            $table->string('nick', 32);
-            $table->string('nazev')->index('nazev');
-            $table->primary(['nick', 'nazev']);
+            $table->id();
+            $table->unsignedBigInteger('id_users')->index('id_users'); // foreign key
+            $table->unsignedBigInteger('id_skupina')->index('id_skupina'); // foreign key
+            $table->timestamps();
+            $table->unique(['id_users', 'id_skupina']);
         });
     }
 

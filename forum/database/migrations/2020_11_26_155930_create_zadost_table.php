@@ -14,12 +14,13 @@ class CreateZadostTable extends Migration
     public function up()
     {
         Schema::create('zadost', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->unsignedTinyInteger('typ');
             $table->string('text', 2000)->nullable();
             $table->unsignedTinyInteger('stav');
-            $table->string('od', 32)->index('od');
-            $table->string('do')->index('do');
+            $table->unsignedBigInteger('od')->index('od'); // foreign key
+            $table->unsignedBigInteger('do')->index('do'); // foreign key
+            $table->timestamps();
         });
     }
 

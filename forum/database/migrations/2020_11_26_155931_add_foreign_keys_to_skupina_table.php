@@ -14,7 +14,7 @@ class AddForeignKeysToSkupinaTable extends Migration
     public function up()
     {
         Schema::table('skupina', function (Blueprint $table) {
-            $table->foreign('spravce', 'skupina_ibfk_1')->references('nick')->on('uzivatel')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('spravce', 'skupina_ibfk_1')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }
 
