@@ -24,7 +24,7 @@ class ProfileUpdate extends FormRequest
     public function rules()
     {
         return [
-            'mame' => 'required',
+            'name' => 'required',
             'bio' => ''
         ];
     }

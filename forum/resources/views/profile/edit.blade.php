@@ -17,11 +17,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="bio">User description</label>
-                                <textarea name="user description" cols="10" rows="5" class="form-control"  id="bio">{{ $user->bio }}</textarea>
+                                <textarea name="bio" cols="10" rows="5" class="form-control" id="bio">{{ $user->bio }}</textarea>
                             </div>
 
                             <button type="submit" class="btn btn-success">Update</button>
                         </form>
+                        @if($errors->any())
+                            {!! implode('', $errors->all('<div>:message</div>')) !!}
+                        @endif
 
                     </div>
                 </div>

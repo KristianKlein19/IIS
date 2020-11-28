@@ -13,10 +13,13 @@ class ProfileController extends Controller
     }
 
     public function update(ProfileUpdate $form) {
-        $user = auth()->user();
+        $user = auth()->user()->getUser();
 
-        //TODO Update database
+        $user->name = $form['name'];
+        $user->bio = $form['bio'];
 
-        return redirect()-back();
+        $user->save();
+
+        return redirect()->back();
     }
 }
