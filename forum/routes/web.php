@@ -13,10 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('home');
+});
+
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+// Route::resource('/password/reset', 'ResetPasswordController');
