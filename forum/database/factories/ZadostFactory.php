@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Skupina;
+use App\Models\Zadost;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SkupinaFactory extends Factory
+class ZadostFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Skupina::class;
+    protected $model = Zadost::class;
 
     /**
      * Define the model's default state.
@@ -22,11 +22,11 @@ class SkupinaFactory extends Factory
     public function definition()
     {
         return [
-            'nazev' => $this->faker->sentence( rand(1,3) ),
-            'popis' => $this->faker->sentence( rand(0,25) ),
-            'zabezpeceni_profilu' => true,
-            'zabezpeceni_obsahu' => true,
-            'spravce' => rand(1,50),
+            'typ' => rand(0, 1),
+            'text' => $this->faker->sentence( rand(0, 50) ),
+            'stav' => rand(0, 1),
+            'od' => rand(1,50),
+            'do' => rand(1,50),
             'created_at' => now(),
             'updated_at' => now(),
         ];
