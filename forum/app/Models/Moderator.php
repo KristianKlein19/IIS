@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Skupina extends Model
+class Moderator extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class Skupina extends Model
      *
      * @var string
      */
-    protected $table = 'skupina';
+    protected $table = 'moderator';
 
     /**
      * The attributes that are mass assignable.
@@ -22,11 +22,8 @@ class Skupina extends Model
      * @var array
      */
     protected $fillable = [
-        'nazev',
-        'popis',
-        'zabezpeceni_profilu',
-        'zabezpeceni_obsahu',
-        'spravce',
+        'id_users',
+        'id_skupina',
         'created_at',
         'updated_at',
     ];

@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Skupina;
+use App\Models\Vlakno;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SkupinaFactory extends Factory
+class VlaknoFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Skupina::class;
+    protected $model = Vlakno::class;
 
     /**
      * Define the model's default state.
@@ -24,9 +24,10 @@ class SkupinaFactory extends Factory
         return [
             'nazev' => $this->faker->sentence( rand(1,3) ),
             'popis' => $this->faker->sentence( rand(0,25) ),
-            'zabezpeceni_profilu' => true,
-            'zabezpeceni_obsahu' => true,
-            'spravce' => rand(1,50),
+            'stav' => false,
+            'pripnute_vlakno' => false,
+            'soucast' => rand(1,50),
+            'zakladatel' => rand(1,50),
             'created_at' => now(),
             'updated_at' => now(),
         ];

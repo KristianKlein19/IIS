@@ -18,7 +18,7 @@ class CreateModeratorTable extends Migration
             $table->unsignedBigInteger('id_users')->index('id_users'); // foreign key
             $table->unsignedBigInteger('id_skupina')->index('id_skupina'); // foreign key
             $table->timestamps();
-            $table->unique(['id_users', 'id_skupina']);
+            //$table->unique(['id_users', 'id_skupina']);
         });
     }
 

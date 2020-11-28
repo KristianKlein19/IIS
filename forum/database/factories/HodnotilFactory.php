@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Skupina;
+use App\Models\Hodnotil;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SkupinaFactory extends Factory
+class HodnotilFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Skupina::class;
+    protected $model = Hodnotil::class;
 
     /**
      * Define the model's default state.
@@ -22,11 +22,9 @@ class SkupinaFactory extends Factory
     public function definition()
     {
         return [
-            'nazev' => $this->faker->sentence( rand(1,3) ),
-            'popis' => $this->faker->sentence( rand(0,25) ),
-            'zabezpeceni_profilu' => true,
-            'zabezpeceni_obsahu' => true,
-            'spravce' => rand(1,50),
+            'id_users' => rand(1,50),
+            'id_prispevek' => rand(1,50),
+            'hodnotil' => rand(0, 1),
             'created_at' => now(),
             'updated_at' => now(),
         ];

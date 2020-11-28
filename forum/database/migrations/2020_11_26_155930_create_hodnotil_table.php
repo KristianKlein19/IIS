@@ -19,7 +19,7 @@ class CreateHodnotilTable extends Migration
             $table->unsignedBigInteger('id_prispevek')->index('id_prispevek'); // foreign key
             $table->tinyInteger('hodnotil');
             $table->timestamps();
-            $table->unique(['id_users', 'id_prispevek']);
+            //$table->unique(['id_users', 'id_prispevek']);
         });
     }
 
