@@ -39,9 +39,9 @@
 
                         @else()
 
-                            @if (auth()->user()->isAdmin() && Route::has('userlist.index'))
+                            @if (auth()->user()->isAdmin() && Route::has('userlist'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('userlist.index') }}">{{ __('Users') }}</a>
+                                    <a class="nav-link" href="{{ route('userlist') }}">{{ __('Users') }}</a>
                                 </li>
                             @endif
 

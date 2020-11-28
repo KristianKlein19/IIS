@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::middleware(['auth', 'admin'])->group(function() {
+    Route::get('/users', [App\Http\Controllers\UserListController::class, 'index'])->name('userlist');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
