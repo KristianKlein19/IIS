@@ -24,7 +24,11 @@
                                             {{ $user->email }}
                                         </td>
                                         <td>
-                                            {{ $user->admin }}
+                                            @if ($user->admin)
+                                                <b>Yes<b/>
+                                            @else
+                                                No
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
