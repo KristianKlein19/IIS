@@ -36,12 +36,24 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @guest()
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('groups') }}">{{ __('Groups') }}</a>
+                            </li>
                         @else()
 
                             @if (auth()->user()->isAdmin() && Route::has('userlist'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('userlist') }}">{{ __('Users') }}</a>
+                                </li>
+                            @endif
+                            @if (auth()->user())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('groups') }}">{{ __('Groups') }}</a>
+                                </li>
+                            @endif
+                            @if (auth()->user())
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('group.create') }}">{{ __('Create new group') }}</a>
                                 </li>
                             @endif
 
@@ -86,10 +98,10 @@
                 </div>
             </div>
         </nav>
-
         <main class="py-4">
-            @yield('content')
-        </main>
+        @yield('content')
+    </main>
     </div>
+    @yield('js')
 </body>
 </html>
