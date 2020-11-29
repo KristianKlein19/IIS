@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <form action="{{ route('group.store') }}" method="POST">
-                        @csrf 
+                        @csrf
                         <div class="form-group">
                             <label for="nazev">Title</label>
 
@@ -22,12 +22,12 @@
                         </div>
                         <ul>
                             <li>
-                                <input id="s1" type="checkbox" class="switch">
-                                <label for="s1">Group Profile Visibility</label>
+                                <input id="zabezpeceni_profilu" type="checkbox" class="switch">
+                                <label for="zabezpeceni_profilu">Group Profile Visibility</label>
                             </li>
                             <li>
-                                <input id="s2" type="checkbox" class="switch" >
-                                <label for="s2">Content Visibility</label>
+                                <input id="zabezpeceni_obsahu" type="checkbox" class="switch">
+                                <label for="zabezpeceni_obsahu">Content Visibility</label>
                             </li>
                         </ul>
                         <button type="submit" class="btn btn-success">Create Group</button>

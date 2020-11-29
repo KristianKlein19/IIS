@@ -45,7 +45,9 @@ class GroupController extends Controller
         Skupina::Create([
             'nazev' => $request->nazev,
             'popis' => $request->popis,
-            'spravce' => auth()->user()->id
+            'spravce' => auth()->user()->id,
+            'zabezpeceni_profilu' => $request->has('zabezpeceni_profilu'),
+            'zabezpeceni_obsahu' => $request->has('zabezpeceni_obsahu')
         ]);
 
         session()->flash('success', 'Group was successfuly created');
