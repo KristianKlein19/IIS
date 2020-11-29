@@ -22,11 +22,11 @@
                         </div>
                         <ul>
                             <li>
-                                <input id="zabezpeceni_profilu" type="checkbox" class="switch">
+                                <input id="zabezpeceni_profilu" name="zabezpeceni_profilu" type="checkbox" class="switch">
                                 <label for="zabezpeceni_profilu">Group Profile Visibility</label>
                             </li>
                             <li>
-                                <input id="zabezpeceni_obsahu" type="checkbox" class="switch">
+                                <input id="zabezpeceni_obsahu" name="zabezpeceni_profilu" type="checkbox" class="switch">
                                 <label for="zabezpeceni_obsahu">Content Visibility</label>
                             </li>
                         </ul>
