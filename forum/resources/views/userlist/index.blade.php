@@ -18,7 +18,7 @@
                                 @foreach($userlist as $user)
                                     <tr>
                                         <td>
-                                            {{ $user->name }}
+                                            <a class="nav-link" href="/profiles/{{ $user->id }}">{{ $user->name }}</a>
                                         </td>
                                         <td>
                                             {{ $user->email }}

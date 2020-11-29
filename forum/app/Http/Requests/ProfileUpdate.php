@@ -24,8 +24,8 @@ class ProfileUpdate extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'bio' => ''
+            'name' => 'required|min:4|max:32',
+            'bio' => 'max:5000'
         ];
     }
 }

@@ -22,4 +22,8 @@ class ProfileController extends Controller
 
         return redirect()->back();
     }
+
+    public function show($user) {
+        return view('profile.view')->with('user', User::find($user));
+    }
 }

@@ -29,6 +29,8 @@ Route::middleware(['auth'])->group(function() {
     Route::put('/update-profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('update-profile');
 });
 
+Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
