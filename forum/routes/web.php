@@ -26,13 +26,13 @@ Route::middleware(['auth', 'admin'])->group(function() {
 });
 
     Route::get('/groups', [App\Http\Controllers\GroupController::class, 'index'])->name('groups');
-    
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/edit-profile', [App\Http\Controllers\ProfileController::class, 'edit'])->name('edit-profile');
-    
+
     Route::put('/update-profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('update-profile');
-    
+
     Route::get('/groups', [App\Http\Controllers\GroupController::class, 'index'])->name('groups');
 
     Route::get('/group/create', [App\Http\Controllers\GroupController::class, 'create'])->name('group.create');
@@ -42,7 +42,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/group/edit/{id}', [App\Http\Controllers\GroupController::class, 'edit'])->name('group.edit');
 });
 
-Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']); 
+Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);
+
+Route::get('/groups/{id}', [App\Http\Controllers\GroupController::class, 'view']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

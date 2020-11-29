@@ -101,4 +101,8 @@ class GroupController extends Controller
     {
         //
     }
+
+    public function view($group) {
+        return view('groups.view')->with('skupina', Skupina::find($group));
+    }
 }

@@ -10,9 +10,9 @@
                     <table class="table table-hover">
                         <thead>
                             <th>
-                                Group name 
+                                Group name
                             </th>
-                            <th> 
+                            <th>
                                 Settings
                             </th>
                             <th>
@@ -24,7 +24,7 @@
                             @foreach($groups as $skupina)
                                 <tr>
                                     <td>
-                                        {{ $skupina->nazev }}
+                                        <a class="nav-link" href="/groups/{{ $skupina->id }}">{{ $skupina->nazev }}</a>
                                     </td>
                                     <td>
                                         <a href="{{ route('group.edit', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
@@ -48,7 +48,7 @@
             </div>
         </div>
     </div>
-@else 
+@else
     <div class="container py-4">
         <div class="panel panel-default">
             <div class="card">
@@ -56,9 +56,9 @@
                     <table class="table table-hover">
                         <thead>
                             <th>
-                                Group name 
+                                Group name
                             </th>
-                            <th> 
+                            <th>
                                 Editing
                             </th>
                             <th>
@@ -80,6 +80,6 @@
             </div>
         </div>
     </div>
-@endauth   
+@endauth
 
 @endsection
