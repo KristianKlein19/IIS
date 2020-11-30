@@ -8,7 +8,7 @@
                     <div class="card-header">Moderator request for <b>{{ $skupina->nazev }}</b></div>
 
                     <div class="card-body">
-                        <form action="{{ route('request.moderator') }}" method="POST">
+                        <form action="{{ route('request.moderator', [ 'id' => $skupina->id]) }}" method="POST">
                             @csrf
 
                             <input name="skupina" type="hidden" value="{{ $skupina->id }}">

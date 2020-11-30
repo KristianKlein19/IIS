@@ -47,7 +47,7 @@ Route::middleware(['auth', 'member'])->group(function () {
 
     Route::get('/groups/{id}/request-moderator', [App\Http\Controllers\RequestController::class, 'showModeratorRequestForm'])->name('moderator-form');
 
-    Route::post('/request/moderator', [App\Http\Controllers\RequestController::class, 'moderator'])->name('request.moderator');
+    Route::post('/request/moderator/{id}', [App\Http\Controllers\RequestController::class, 'moderator'])->name('request.moderator');
 
 });
 
@@ -59,6 +59,8 @@ Route::middleware(['auth', 'moderator'])->group(function () {
 
     Route::get('/groups/{id}/requests', [App\Http\Controllers\RequestController::class, 'index'])->name('group.requests');
 
+    Route::get('/groups/{id}/boot/{member}', [App\Http\Controllers\GroupController::class, 'boot'])->name('group.boot');
+
 });
 
 Route::middleware(['auth', 'spravce'])->group(function () {
@@ -66,6 +68,8 @@ Route::middleware(['auth', 'spravce'])->group(function () {
     Route::get('/group/edit/{id}', [App\Http\Controllers\GroupController::class, 'edit'])->name('group.edit');
 
     Route::put('/group/update/{id}', [App\Http\Controllers\GroupController::class, 'update'])->name('group.update');
+
+    Route::get('/groups/{id}/unmod/{member}', [App\Http\Controllers\GroupController::class, 'unmod'])->name('group.unmod');
 
 });
 
