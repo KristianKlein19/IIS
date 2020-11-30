@@ -42,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/groups/{id}/requests', [App\Http\Controllers\RequestController::class, 'index'])->name('group.requests');
 
+    Route::get('/group/{id1}/thread/{id2}', [App\Http\Controllers\ThreadController::class, 'index'])->name('thread');
+
     Route::get('/request/{id}/reject', [App\Http\Controllers\RequestController::class, 'reject'])->name('request.reject');
 
     Route::get('/request/{id}/accept', [App\Http\Controllers\RequestController::class, 'accept'])->name('request.accept');

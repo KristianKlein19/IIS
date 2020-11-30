@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateGroupRequest;
 use App\Models\Skupina;
 use App\Models\User;
+use App\Models\Vlakno;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -125,7 +126,7 @@ class GroupController extends Controller
 
     public function view($group)
     {
-        return view('groups.view')->with('skupina', Skupina::find($group));
+        return view('groups.view')->with('skupina', Skupina::find($group))->with('threads', Vlakno::where('soucast', $group)->get());
     }
 
     public function members($group) {

@@ -11,36 +11,52 @@
                         {{ $skupina->popis }}
                     </div>
 
-                    @if (auth()->user() != null)
                         <div class="card-footer">
-                            @if ($skupina->zabezpeceni_profilu == 0 || auth()->user()->isMember($skupina))
-                                <a href="{{ route('group.members', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
-                                    <span class="glyphicon glyphicon-info">
-                                        Members
-                                    </span>
-                                </a>
-                            @endif
-                            @if (auth()->user()->isModFor($skupina))
-                                <a href="{{ route('group.requests', ['id' => $skupina->id]) }}" class="btn btn-xs btn-warning">
-                                    <span class="glyphicon glyphicon-warning">
-                                        Manage requests
-                                    </span>
-                                </a>
-                            @elseif (auth()->user()->isMember($skupina))
-                                <a href="{{ route('moderator-form', ['id' => $skupina->id]) }}" class="btn btn-xs btn-warning">
-                                    <span class="glyphicon glyphicon-warning">
-                                        Become moderator
-                                    </span>
-                                </a>
-                            @else
-                                <a href="{{ route('membership-form', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
-                                    <span class="glyphicon glyphicon-info">
-                                        Join
-                                    </span>
-                                </a>
+                            @if (auth()->user() != null)
+                                @if ($skupina->zabezpeceni_profilu == 0 || auth()->user()->isMember($skupina))
+                                    <a href="{{ route('group.members', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
+                                        <span class="glyphicon glyphicon-info">
+                                            Members
+                                        </span>
+                                    </a>
+                                @endif
+                                @if (auth()->user()->isModFor($skupina))
+                                    <a href="{{ route('group.requests', ['id' => $skupina->id]) }}" class="btn btn-xs btn-warning">
+                                        <span class="glyphicon glyphicon-warning">
+                                            Manage requests
+                                        </span>
+                                    </a>
+                                @elseif (auth()->user()->isMember($skupina))
+                                    <a href="{{ route('moderator-form', ['id' => $skupina->id]) }}" class="btn btn-xs btn-warning">
+                                        <span class="glyphicon glyphicon-warning">
+                                            Become moderator
+                                        </span>
+                                    </a>
+                                @else
+                                    <a href="{{ route('membership-form', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
+                                        <span class="glyphicon glyphicon-info">
+                                            Join
+                                        </span>
+                                    </a>
+                                @endif
                             @endif
                         </div>
-                    @endif
+
+                    <table class="table table-hover">
+                        <thead><th style="text-align:center">Threads</th></thead>
+
+                        <tbody>
+                        @foreach($threads as $thread)
+                            <tr>
+                                <td>
+                                    <a class="nav-link" href="{{ route('thread', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-xs btn-info">
+                                        {{ $thread->nazev }}
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
