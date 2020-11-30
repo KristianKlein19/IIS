@@ -36,8 +36,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/group/store', [App\Http\Controllers\GroupController::class, 'store'])->name('group.store');
 
-    Route::get('/groups/{id}/members', [App\Http\Controllers\GroupController::class, 'members'])->name('group.members');
-
     Route::get('/groups/{id}/request-membership', [App\Http\Controllers\RequestController::class, 'showMembershipRequestForm'])->name('membership-form');
 
     Route::post('/request/membership', [App\Http\Controllers\RequestController::class, 'member'])->name('request.membership');
@@ -76,6 +74,12 @@ Route::middleware(['auth', 'spravce'])->group(function () {
 Route::middleware(['profil'])->group(function () {
 
     Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);
+
+});
+
+Route::middleware(['members.list'])->group(function () {
+
+    Route::get('/groups/{id}/members', [App\Http\Controllers\GroupController::class, 'members'])->name('group.members');
 
 });
 

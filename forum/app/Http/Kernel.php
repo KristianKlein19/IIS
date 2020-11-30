@@ -68,5 +68,7 @@ class Kernel extends HttpKernel
         'member' => \App\Http\Middleware\GroupMember::class,
         'spravce' => \App\Http\Middleware\GroupAdministrator::class,
         'profil' => \App\Http\Middleware\ProfileProtection::class,
+        'members.list' => \App\Http\Middleware\GroupMemberList::class,
+        'posts' => \App\Http\Middleware\GroupPosts::class
     ];
 }
