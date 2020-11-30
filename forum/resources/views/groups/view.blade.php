@@ -13,15 +13,22 @@
 
                     @if (auth()->user() != null)
                         <div class="card-footer">
-                            @if (auth()->user()->isModFor($skupina))
-                                <a href="{{ route('group.requests', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
+                            @if ($skupina->zabezpeceni_profilu == 0 || auth()->user()->isMember($skupina))
+                                <a href="{{ route('group.members', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
                                     <span class="glyphicon glyphicon-info">
+                                        Members
+                                    </span>
+                                </a>
+                            @endif
+                            @if (auth()->user()->isModFor($skupina))
+                                <a href="{{ route('group.requests', ['id' => $skupina->id]) }}" class="btn btn-xs btn-warning">
+                                    <span class="glyphicon glyphicon-warning">
                                         Manage requests
                                     </span>
                                 </a>
                             @elseif (auth()->user()->isMember($skupina))
-                                <a href="{{ route('moderator-form', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
-                                    <span class="glyphicon glyphicon-info">
+                                <a href="{{ route('moderator-form', ['id' => $skupina->id]) }}" class="btn btn-xs btn-warning">
+                                    <span class="glyphicon glyphicon-warning">
                                         Become moderator
                                     </span>
                                 </a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateGroupRequest;
 use App\Models\Skupina;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -125,5 +126,9 @@ class GroupController extends Controller
     public function view($group)
     {
         return view('groups.view')->with('skupina', Skupina::find($group));
+    }
+
+    public function members($group) {
+        return view('groups.members')->with('userlist', Skupina::find($group)->getMembers())->with('skupina', Skupina::find($group));
     }
 }
