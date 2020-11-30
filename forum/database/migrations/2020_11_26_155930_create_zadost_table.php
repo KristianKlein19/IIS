@@ -16,7 +16,7 @@ class CreateZadostTable extends Migration
         Schema::create('zadost', function (Blueprint $table) {
             $table->id();
             $table->unsignedTinyInteger('typ');
-            $table->string('text', 2000)->nullable();
+            $table->string('text', 200)->nullable();
             $table->unsignedTinyInteger('stav');
             $table->unsignedBigInteger('od')->index('od'); // foreign key
             $table->unsignedBigInteger('do')->index('do'); // foreign key

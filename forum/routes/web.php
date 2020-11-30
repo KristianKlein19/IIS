@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/group/store', [App\Http\Controllers\GroupController::class, 'store'])->name('group.store');
 
     Route::get('/group/edit/{id}', [App\Http\Controllers\GroupController::class, 'edit'])->name('group.edit');
+
+    Route::get('/groups/{id}/requests', [App\Http\Controllers\RequestController::class, 'index']);
 });
 
 Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);

@@ -30,4 +30,9 @@ class Zadost extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function getUser()
+    {
+        return User::find($this->od);
+    }
 }

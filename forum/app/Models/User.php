@@ -61,13 +61,13 @@ class User extends Authenticatable
     {
         if ($this->viditelnost == 0) // unprotected profile can be viewed by all users
             return true;
-        elseif (auth()->user() == null) // authorised check
+        elseif (auth()->user() == null) // authorisation check
             return false;
         elseif ($this->viditelnost == 1) // authorised user can view profile visible only for registered users
             return true;
-        elseif (auth()->user()->isAdmin()) // admin can view all profiles
-            return true;
         elseif ($this == auth()->user()->getUser()) // user can view their own profile
+            return true;
+        elseif (auth()->user()->isAdmin()) // admin can view all profiles
             return true;
         else
             return false;
