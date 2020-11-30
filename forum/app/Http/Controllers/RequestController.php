@@ -13,7 +13,7 @@ class RequestController extends Controller
     public function index($group) {
         if (!(auth()->user()->isModFor(Skupina::find($group))))
             return redirect()->home();
-        return view('request.index')->with('requests', Zadost::all()->where('do', $group));
+        return view('request.index')->with('requests', Zadost::all()->where('do', $group))->with('skupina', Skupina::find($group));
     }
 
     public function reject($id) {

@@ -41,11 +41,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/group/edit/{id}', [App\Http\Controllers\GroupController::class, 'edit'])->name('group.edit');
 
-    Route::get('/groups/{id}/requests', [App\Http\Controllers\RequestController::class, 'index']);
+    Route::get('/groups/{id}/requests', [App\Http\Controllers\RequestController::class, 'index'])->name('group.requests');
 
     Route::get('/request/{id}/reject', [App\Http\Controllers\RequestController::class, 'reject'])->name('request.reject');
 
     Route::get('/request/{id}/accept', [App\Http\Controllers\RequestController::class, 'accept'])->name('request.accept');
+
+    Route::get('/groups/{id}/request-membership', [App\Http\Controllers\RequestController::class, 'member'])->name('group.request.member');
 });
 
 Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);

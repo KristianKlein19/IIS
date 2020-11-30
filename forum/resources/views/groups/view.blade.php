@@ -10,6 +10,16 @@
                     <div class="card-body">
                         {{ $skupina->popis }}
                     </div>
+
+                    <div class="card-footer">
+                        @if (auth()->user()->isModFor($skupina))
+                            <a href="{{ route('group.requests', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
+                                <span class="glyphicon glyphicon-info">
+                                    Manage requests
+                                </span>
+                            </a>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
