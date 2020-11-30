@@ -38,6 +38,20 @@ Route::middleware(['auth'])->group(function () {
     
     Route::put('/group/update/{id}', [App\Http\Controllers\GroupController::class, 'update'])->name('group.update');
 
+
+    Route::get('/groups/{id}/requests', [App\Http\Controllers\RequestController::class, 'index'])->name('group.requests');
+
+    Route::get('/request/{id}/reject', [App\Http\Controllers\RequestController::class, 'reject'])->name('request.reject');
+
+    Route::get('/request/{id}/accept', [App\Http\Controllers\RequestController::class, 'accept'])->name('request.accept');
+
+    Route::get('/groups/{id}/request-membership', [App\Http\Controllers\RequestController::class, 'showMembershipRequestForm'])->name('membership-form');
+
+    Route::post('/request/membership', [App\Http\Controllers\RequestController::class, 'member'])->name('request.membership');
+
+    Route::get('/groups/{id}/request-moderator', [App\Http\Controllers\RequestController::class, 'showModeratorRequestForm'])->name('moderator-form');
+
+    Route::post('/request/moderator', [App\Http\Controllers\RequestController::class, 'moderator'])->name('request.moderator');
 });
 
 

@@ -30,4 +30,14 @@ class Zadost extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function getUser()
+    {
+        return User::find($this->od);
+    }
+
+    public function getGroup()
+    {
+        return Skupina::find($this->do);
+    }
 }

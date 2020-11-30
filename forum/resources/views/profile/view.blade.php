@@ -8,7 +8,11 @@
                     <div class="card-header">{{ $user->name }}</div>
 
                     <div class="card-body">
-                        {{ $user->bio }}
+                        @if ($user->canViewProfile())
+                            {{ $user->bio }}
+                        @else
+                            <div class="alert-danger">You are not allowed to view this profile</div>
+                        @endif
                     </div>
                 </div>
             </div>

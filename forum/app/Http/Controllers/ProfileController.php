@@ -17,6 +17,7 @@ class ProfileController extends Controller
 
         $user->name = $form['name'];
         $user->bio = $form['bio'];
+        $user->viditelnost = $form['viditelnost'];
 
         $user->save();
 
