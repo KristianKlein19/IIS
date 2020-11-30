@@ -31,6 +31,10 @@ class Skupina extends Model
         'updated_at',
     ];
 
+    public function getMembers() {
+        return Clen::all()->where('id_skupina', $this->id);
+    }
+
     public function getAdmin() {
         return User::find($this->spravce);
     }

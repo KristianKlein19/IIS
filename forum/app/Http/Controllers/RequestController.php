@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MembershipRequest;
 use App\Models\Clen;
 use App\Models\Moderator;
 use App\Models\Skupina;
@@ -42,6 +43,21 @@ class RequestController extends Controller
         }
         $request->stav = 1;
         $request->save();
+        return redirect()->back();
+    }
+
+    public function showMembershipRequestForm($group_id) {
+        return view('request.membership')->with('skupina', Skupina::find($group_id));
+    }
+
+    public function member(MembershipRequest $form) {
+        Zadost::Create([
+            'typ' => 0,
+            'text' => $form->msg,
+            'od' => auth()->user()->id,
+            'do' => $form->skupina,
+            'stav' => 0
+        ]);
         return redirect()->back();
     }
 }
