@@ -73,9 +73,13 @@ Route::middleware(['auth', 'spravce'])->group(function () {
 
 });
 
-Route::get('/groups', [App\Http\Controllers\GroupController::class, 'index'])->name('groups');
+Route::middleware(['profil'])->group(function () {
 
-Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);
+    Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);
+
+});
+
+Route::get('/groups', [App\Http\Controllers\GroupController::class, 'index'])->name('groups');
 
 Route::get('/groups/{id}', [App\Http\Controllers\GroupController::class, 'view'])->name('group.view');
 

@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdministratorPrivilegeCheck::class,
         'moderator' => \App\Http\Middleware\GroupModerator::class,
         'member' => \App\Http\Middleware\GroupMember::class,
-        'spravce' => \App\Http\Middleware\GroupAdministrator::class
+        'spravce' => \App\Http\Middleware\GroupAdministrator::class,
+        'profil' => \App\Http\Middleware\ProfileProtection::class,
     ];
 }

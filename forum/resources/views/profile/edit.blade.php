@@ -32,6 +32,11 @@
                                     @else
                                         <option value="1">Visible for registered users</option>
                                     @endif
+                                    @if ($user->viditelnost == 2)
+                                        <option value="2" selected>Visible for members of groups</option>
+                                    @else
+                                        <option value="2">Visible for members of groups</option>
+                                    @endif
                                 </select>
                             </div>
 
