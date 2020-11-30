@@ -43,15 +43,29 @@
                         </div>
 
                     <table class="table table-hover">
-                        <thead><th style="text-align:center">Threads</th></thead>
+                        <thead>
+                            <th>
+                                Threads
+                            </th>
+                            <th style="text-align:right">
+                                From
+                            </th>
+                        </thead>
 
                         <tbody>
                         @foreach($threads as $thread)
                             <tr>
                                 <td>
-                                    <a class="nav-link" href="{{ route('thread', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-xs btn-info">
+                                    <a class="nav-link" href="{{ route('thread', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}">
                                         {{ $thread->nazev }}
                                     </a>
+                                </td>
+                                <td style="text-align:right">
+                                    @foreach($users as $user)
+                                        @if($user->id == $thread->zakladatel)
+                                            {{ $user->name }}
+                                        @endif
+                                    @endforeach
                                 </td>
                             </tr>
                         @endforeach

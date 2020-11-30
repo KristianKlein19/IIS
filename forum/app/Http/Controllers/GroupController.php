@@ -126,7 +126,7 @@ class GroupController extends Controller
 
     public function view($group)
     {
-        return view('groups.view')->with('skupina', Skupina::find($group))->with('threads', Vlakno::where('soucast', $group)->get());
+        return view('groups.view')->with('skupina', Skupina::find($group))->with('threads', Vlakno::where('soucast', $group)->get())->with('users', User::all());
     }
 
     public function members($group) {
