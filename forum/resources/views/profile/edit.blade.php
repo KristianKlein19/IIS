@@ -19,6 +19,21 @@
                                 <label for="bio">User description</label>
                                 <textarea name="bio" cols="10" rows="5" class="form-control" id="bio">{{ $user->bio }}</textarea>
                             </div>
+                            <div class="form-group">
+                                <label for="viditelnost">Profile visibility</label>
+                                <select name="viditelnost" id="viditelnost">
+                                    @if ($user->viditelnost == 0)
+                                        <option value="0" selected>Visible for all</option>
+                                    @else
+                                        <option value="0">Visible for all</option>
+                                    @endif
+                                    @if ($user->viditelnost == 1)
+                                        <option value="1" selected>Visible for registered users</option>
+                                    @else
+                                        <option value="1">Visible for registered users</option>
+                                    @endif
+                                </select>
+                            </div>
 
                             <button type="submit" class="btn btn-success">Update</button>
                         </form>

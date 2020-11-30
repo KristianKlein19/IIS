@@ -25,7 +25,8 @@ class ProfileUpdate extends FormRequest
     {
         return [
             'name' => 'required|min:4|max:32',
-            'bio' => 'max:5000'
+            'bio' => 'max:5000',
+            'viditelnost' => 'required'
         ];
     }
 }
