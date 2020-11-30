@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/group/store', [App\Http\Controllers\GroupController::class, 'store'])->name('group.store');
 
     Route::get('/group/delete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('group.delete');
+
+    Route::get('/groups/{id}/request-membership', [App\Http\Controllers\RequestController::class, 'showMembershipRequestForm'])->name('membership-form');
+
+    Route::post('/request/membership', [App\Http\Controllers\RequestController::class, 'member'])->name('request.membership');
 });
 
 Route::middleware(['auth', 'member'])->group(function () {
