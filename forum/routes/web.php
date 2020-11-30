@@ -21,8 +21,6 @@ Auth::routes();
 
 Route::middleware(['auth', 'admin'])->group(function() {
     Route::get('/users', [App\Http\Controllers\UserListController::class, 'index'])->name('userlist');
-
-    Route::get('/group/delete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('group.delete');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -35,9 +33,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/group/store', [App\Http\Controllers\GroupController::class, 'store'])->name('group.store');
 
     Route::get('/group/edit/{id}', [App\Http\Controllers\GroupController::class, 'edit'])->name('group.edit');
+
+    Route::get('/group/delete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('group.delete');
     
     Route::put('/group/update/{id}', [App\Http\Controllers\GroupController::class, 'update'])->name('group.update');
-
 
     Route::get('/groups/{id}/requests', [App\Http\Controllers\RequestController::class, 'index'])->name('group.requests');
 

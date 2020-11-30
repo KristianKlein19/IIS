@@ -23,7 +23,7 @@ class ZadostFactory extends Factory
     {
         return [
             'typ' => rand(0, 1),
-            'text' => $this->faker->sentence( rand(0, 50) ),
+            'text' => $this->faker->sentence( rand(0, 20) ),
             'stav' => rand(0, 1),
             'od' => rand(1,50),
             'do' => rand(1,50),

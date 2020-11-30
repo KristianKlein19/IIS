@@ -13,10 +13,10 @@
                                 Group name
                             </th>
                             <th>
-                                Settings
+                                Created
                             </th>
                             <th>
-                                Removing
+                                Updated
                             </th>
                         </thead>
 
@@ -27,18 +27,10 @@
                                         <a class="nav-link" href="/groups/{{ $skupina->id }}">{{ $skupina->nazev }}</a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('group.edit', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
-                                            <span class="glyphicon glyphicon-pencil">
-                                                Edit
-                                            </span>
-                                        </a>
+                                        {{ $skupina->created_at}}
                                     </td>
                                     <td>
-                                        <a href="{{ route('group.delete', ['id' => $skupina->id]) }}" class="btn btn-xs btn-danger">
-                                            <span class="glyphicon glyphicon-trash">
-                                                Delete
-                                            </span>
-                                        </a>
+                                        {{ $skupina->updated_at}}
                                     </td>
                                 </tr>
                             @endforeach
