@@ -49,7 +49,7 @@
         </div>
     </div>
 @else
-    <div class="container py-4">
+    <div class="container">
         <div class="panel panel-default">
             <div class="card">
                 <div class="panel-body">
@@ -57,12 +57,6 @@
                         <thead>
                             <th>
                                 Group name
-                            </th>
-                            <th>
-                                Editing
-                            </th>
-                            <th>
-                                Deleting
                             </th>
                         </thead>
 

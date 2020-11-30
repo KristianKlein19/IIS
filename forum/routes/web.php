@@ -25,26 +25,27 @@ Route::middleware(['auth', 'admin'])->group(function() {
     Route::get('/group/delete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('group.delete');
 });
 
-    Route::get('/groups', [App\Http\Controllers\GroupController::class, 'index'])->name('groups');
-
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/edit-profile', [App\Http\Controllers\ProfileController::class, 'edit'])->name('edit-profile');
 
     Route::put('/update-profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('update-profile');
-
-    Route::get('/groups', [App\Http\Controllers\GroupController::class, 'index'])->name('groups');
 
     Route::get('/group/create', [App\Http\Controllers\GroupController::class, 'create'])->name('group.create');
 
     Route::post('/group/store', [App\Http\Controllers\GroupController::class, 'store'])->name('group.store');
 
     Route::get('/group/edit/{id}', [App\Http\Controllers\GroupController::class, 'edit'])->name('group.edit');
+    
+    Route::put('/group/update/{id}', [App\Http\Controllers\GroupController::class, 'update'])->name('group.update');
+
 });
+
+
+Route::get('/groups', [App\Http\Controllers\GroupController::class, 'index'])->name('groups');
 
 Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);
 
-Route::get('/groups/{id}', [App\Http\Controllers\GroupController::class, 'view']);
+Route::get('/groups/{id}', [App\Http\Controllers\GroupController::class, 'view'])->name('group.view');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

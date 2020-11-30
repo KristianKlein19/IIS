@@ -11,7 +11,7 @@ class GroupController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->only(['create', 'store']);
+        $this->middleware('auth')->only(['create', 'store', 'update']);
     }
 
     /**
@@ -50,9 +50,9 @@ class GroupController extends Controller
             'zabezpeceni_obsahu' => $request->has('zabezpeceni_obsahu')
         ]);
 
-        session()->flash('success', 'Group was successfuly created');
+        session()->flash('success', 'Group was successfully created');
 
-        return redirect()->back();
+        return redirect()->route('groups');
     }
 
     /**
@@ -76,7 +76,7 @@ class GroupController extends Controller
     {
         $skupina = Skupina::find($id);
 
-        //return view('groups.edit');
+        return view('groups.edit')->with('skupina', $skupina);
     }
 
     /**
@@ -88,7 +88,23 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nazev' => 'required',
+            'popis' => 'required'
+        ]);
+
+        $skupina = Skupina::find($id);
+
+        $skupina->nazev = $request->nazev;
+        $skupina->popis = $request->popis;
+        $skupina->zabezpeceni_profilu = $request->has('zabezpeceni_profilu');
+        $skupina->zabezpeceni_obsahu = $request->has('zabezpeceni_obsahu');
+
+        $skupina->save();
+
+        session()->flash('success', 'Group Profile was updated successfuly');
+
+        return redirect()->route('group.view', ['id' => $request->id]);
     }
 
     /**
@@ -99,10 +115,15 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $skupina = Skupina::find($id);
+
+        $skupina->delete();
+
+        return redirect()->route('groups');
     }
 
-    public function view($group) {
+    public function view($group) 
+    {
         return view('groups.view')->with('skupina', Skupina::find($group));
     }
 }
