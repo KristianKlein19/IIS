@@ -42,7 +42,7 @@ class GroupController extends Controller
      */
     public function store(CreateGroupRequest $request)
     {
-        Skupina::Create([
+        $skupina = Skupina::Create([
             'nazev' => $request->nazev,
             'popis' => $request->popis,
             'spravce' => auth()->user()->id,
@@ -52,7 +52,7 @@ class GroupController extends Controller
 
         session()->flash('success', 'Group was successfully created');
 
-        return redirect()->route('groups');
+        return redirect()->route('group.view', ['id' => $skupina->id]);
     }
 
     /**
@@ -122,7 +122,7 @@ class GroupController extends Controller
         return redirect()->route('groups');
     }
 
-    public function view($group) 
+    public function view($group)
     {
         return view('groups.view')->with('skupina', Skupina::find($group));
     }
