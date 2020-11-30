@@ -58,7 +58,7 @@ class RequestController extends Controller
             'do' => $form->skupina,
             'stav' => 0
         ]);
-        return redirect()->back();
+        return redirect()->route('group.view', ['id' => $form->skupina]);
     }
 
     public function showModeratorRequestForm($group_id) {
@@ -73,6 +73,6 @@ class RequestController extends Controller
             'do' => $form->skupina,
             'stav' => 0
         ]);
-        return redirect()->back();
+        return redirect()->back('group.view', ['id' => $form->skupina]);
     }
 }
