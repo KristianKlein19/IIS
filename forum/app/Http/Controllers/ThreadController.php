@@ -13,7 +13,7 @@ class ThreadController extends Controller
      */
     public function index()
     {
-        return view('groups.view')->with('threads', Vlakno::all());
+        return view('thread');
     }
 
     /**

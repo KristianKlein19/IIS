@@ -3,15 +3,10 @@
 @section('content')
 
 @auth
-    0
     <div class="container py-4">
-        1
         <div class="panel panel-default">
-            2
             <div class="card">
-                3
                 <div class="panel-body">
-                    4
                     <table class="table table-hover">
                         <thead>
                             <th>
@@ -46,6 +41,7 @@
                                         </a>
                                     </td>
                                 </tr>
+                                <tr>s</tr>
                             @endforeach
                         </tbody>
                     </table>
