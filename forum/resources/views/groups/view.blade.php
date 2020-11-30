@@ -20,7 +20,11 @@
                                     </span>
                                 </a>
                             @elseif (auth()->user()->isMember($skupina))
-                                Mod request
+                                <a href="{{ route('moderator-form', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
+                                    <span class="glyphicon glyphicon-info">
+                                        Become moderator
+                                    </span>
+                                </a>
                             @else
                                 <a href="{{ route('membership-form', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
                                     <span class="glyphicon glyphicon-info">

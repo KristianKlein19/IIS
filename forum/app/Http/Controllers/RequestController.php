@@ -60,4 +60,19 @@ class RequestController extends Controller
         ]);
         return redirect()->back();
     }
+
+    public function showModeratorRequestForm($group_id) {
+        return view('request.moderator')->with('skupina', Skupina::find($group_id));
+    }
+
+    public function moderator(MembershipRequest $form) {
+        Zadost::Create([
+            'typ' => 1,
+            'text' => $form->msg,
+            'od' => auth()->user()->id,
+            'do' => $form->skupina,
+            'stav' => 0
+        ]);
+        return redirect()->back();
+    }
 }

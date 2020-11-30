@@ -50,6 +50,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/groups/{id}/request-membership', [App\Http\Controllers\RequestController::class, 'showMembershipRequestForm'])->name('membership-form');
 
     Route::post('/request/membership', [App\Http\Controllers\RequestController::class, 'member'])->name('request.membership');
+
+    Route::get('/groups/{id}/request-moderator', [App\Http\Controllers\RequestController::class, 'showModeratorRequestForm'])->name('moderator-form');
+
+    Route::post('/request/moderator', [App\Http\Controllers\RequestController::class, 'moderator'])->name('request.moderator');
 });
 
 Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);
