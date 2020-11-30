@@ -50,13 +50,25 @@
                             <th>
                                 Group name
                             </th>
+                            <th>
+                                Created
+                            </th>
+                            <th>
+                                Updated
+                            </th>
                         </thead>
-
+                        
                         <tbody>
                             @foreach($groups as $skupina)
                                 <tr>
                                     <td>
-                                        {{ $skupina->nazev }}
+                                        <a class="nav-link" href="/groups/{{ $skupina->id }}">{{ $skupina->nazev }}</a>
+                                    </td>
+                                    <td>
+                                        {{ $skupina->created_at}}
+                                    </td>
+                                    <td>
+                                        {{ $skupina->updated_at}}
                                     </td>
                                 </tr>
                             @endforeach
