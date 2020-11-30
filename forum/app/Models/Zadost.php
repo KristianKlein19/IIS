@@ -35,4 +35,9 @@ class Zadost extends Model
     {
         return User::find($this->od);
     }
+
+    public function getGroup()
+    {
+        return Skupina::find($this->do);
+    }
 }

@@ -72,4 +72,10 @@ class User extends Authenticatable
         else
             return false;
     }
+
+    public function isModFor($group) {
+        if ($this->isAdmin())
+            return true;
+        return $group->getMods()->where('id_uzivatele', $this->id)->isNotEmpty();
+    }
 }

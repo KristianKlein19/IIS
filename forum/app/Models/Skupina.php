@@ -30,4 +30,12 @@ class Skupina extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function getAdmin() {
+        return User::find($this->spravce);
+    }
+
+    public function getMods() {
+        return Moderator::all()->where('id_skupina', $this->id);
+    }
 }
