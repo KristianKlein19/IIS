@@ -55,6 +55,23 @@ class ThreadController extends Controller
         return redirect()->route('thread', ['id1' => $request->group_id, 'id2' => $request->thread_id]);
     }
 
+    public function karma(CreateCommentRequest $request)
+    {
+        $prispevek = Prispevek::Create([
+            'karma' => 0,
+            'text' => $request->text,
+            'soucast' => $request->thread_id,
+            'odpoved' => null,
+            'prispevatel' => auth()->user()->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        session()->flash('success', 'Comment was successfully added');
+
+        return redirect()->route('thread', ['id1' => $request->group_id, 'id2' => $request->thread_id]);
+    }
+
     /**
      * Display the specified resource.
      *

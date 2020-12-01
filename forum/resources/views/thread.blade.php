@@ -39,7 +39,46 @@
                                 @if($share->soucast == $thread->id)
                                     <br>
                                     <div class="card" style="margin-left:17px;margin-right:17px;">
-                                        <div class="card-body">{{ $share->text }}</div>
+                                        <div class="card-body">
+                                            <div style="float: left; width: 16%">
+                                                <table class="table">
+                                                    <thead>
+                                                        <th style="text-align:center; border-top: 0px">
+                                                            @if($share->karma < 0)
+                                                                <span style="color: #AA0000">{{ $share->karma }}</span>
+                                                            @elseif($share->karma > 0)
+                                                                <span style="color: #1c7430">{{ $share->karma }}</span>
+                                                            @else
+                                                                <span>{{ $share->karma }}</span>
+                                                            @endif
+                                                        </th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="text-align:center">
+                                                                <span style="float: left">
+                                                                    <a href="{{ route('thread.karma', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-success">
+
+                                                                            +
+
+                                                                    </a>
+                                                                </span>
+                                                                <span style="float: right">
+                                                                    <a href="{{ route('thread.karma', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-danger">
+                                                                        <span class="glyphicon glyphicon-info">
+                                                                            -
+                                                                        </span>
+                                                                    </a>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div style="float: right; width: 79%">
+                                                {{ $share->text }}
+                                            </div>
+                                        </div>
                                         <div class="card-footer">
                                             By
                                             <b>

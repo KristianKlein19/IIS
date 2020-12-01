@@ -36,6 +36,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/group/{id1}/thread/{id2}/store', [App\Http\Controllers\ThreadController::class, 'store'])->name('thread.store');
 
+    Route::post('/group/{id1}/thread/{id2}/karma', [App\Http\Controllers\ThreadController::class, 'karma'])->name('thread.karma');
+
     Route::get('/group/edit/{id}', [App\Http\Controllers\GroupController::class, 'edit'])->name('group.edit');
 
     Route::put('/group/update/{id}', [App\Http\Controllers\GroupController::class, 'update'])->name('group.update');
