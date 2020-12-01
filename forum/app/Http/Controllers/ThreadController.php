@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateCommentRequest;
 use App\Models\Prispevek;
 use App\Models\User;
 use App\Models\Vlakno;
@@ -35,9 +36,21 @@ class ThreadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateCommentRequest $request)
     {
-        //
+        $prispevek = Prispevek::Create([
+            'karma' => 0,
+            'text' => $request->text,
+            'soucast' => $request->thread_id,
+            'odpoved' => null,
+            'prispevatel' => auth()->user()->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        session()->flash('success', 'Comment was successfully added');
+
+        return redirect()->route('thread', ['id1' => $request->group_id, 'id2' => $request->thread_id]);
     }
 
     /**
