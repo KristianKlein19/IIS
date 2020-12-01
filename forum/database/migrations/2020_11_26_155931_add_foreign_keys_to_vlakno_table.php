@@ -14,8 +14,8 @@ class AddForeignKeysToVlaknoTable extends Migration
     public function up()
     {
         Schema::table('vlakno', function (Blueprint $table) {
-            $table->foreign('soucast', 'vlakno_ibfk_1')->references('id')->on('skupina')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('zakladatel', 'vlakno_ibfk_2')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('soucast', 'vlakno_ibfk_1')->references('id')->on('skupina')->onUpdate('RESTRICT')->onDelete('CASCADE');
+            $table->foreign('zakladatel', 'vlakno_ibfk_2')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('SET NULL');
         });
     }
 

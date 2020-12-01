@@ -23,7 +23,7 @@ class ClenFactory extends Factory
     {
         return [
             'id_users' => rand(1,50),
-            'id_skupina' => rand(1,50),
+            'id_skupina' => rand(1,10),
             'created_at' => now(),
             'updated_at' => now(),
         ];

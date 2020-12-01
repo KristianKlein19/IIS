@@ -24,8 +24,8 @@ class CreateGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'nazev' => 'required',
-            'popis' => 'required'
+            'nazev' => 'required|max:10000',
+            'popis' => 'required|max:100'
         ];
     }
 }

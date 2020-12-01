@@ -26,6 +26,16 @@
                                         Manage requests
                                     </span>
                                 </a>
+                                <a href="{{ route('group.edit', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
+                                    <span class="glyphicon glyphicon-pencil">
+                                        Edit Group Profile
+                                    </span>
+                                </a>
+                                <a href="{{ route('group.delete', ['id' => $skupina->id]) }}" class="btn btn-xs btn-danger">
+                                    <span class="glyphicon glyphicon-trash">
+                                        Delete Group
+                                    </span>
+                                </a>
                             @elseif (auth()->user()->isMember($skupina))
                                 <a href="{{ route('moderator-form', ['id' => $skupina->id]) }}" class="btn btn-xs btn-warning">
                                     <span class="glyphicon glyphicon-warning">

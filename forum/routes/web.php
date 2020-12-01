@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,12 +21,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware(['auth', 'admin'])->group(function() {
+
     Route::get('/users', [App\Http\Controllers\UserListController::class, 'index'])->name('userlist');
 
-    Route::get('/group/delete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('group.delete');
+    Route::get('/users/{id}/ban', [App\Http\Controllers\UserListController::class, 'ban'])->name('users.ban');
+
+    Route::get('/group/{id}/takeover', [App\Http\Controllers\GroupController::class, 'takeOver'])->name('group.takeover');
 });
 
 Route::middleware(['auth'])->group(function () {
+
     Route::get('/edit-profile', [App\Http\Controllers\ProfileController::class, 'edit'])->name('edit-profile');
 
     Route::put('/update-profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('update-profile');
@@ -34,17 +39,24 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/group/store', [App\Http\Controllers\GroupController::class, 'store'])->name('group.store');
 
+    Route::get('/groups/{id}/request-membership', [App\Http\Controllers\RequestController::class, 'showMembershipRequestForm'])->name('membership-form');
+    
     Route::post('/group/{id1}/thread/{id2}/store', [App\Http\Controllers\ThreadController::class, 'store'])->name('thread.store');
 
     Route::post('/group/{id1}/thread/{id2}/karma', [App\Http\Controllers\ThreadController::class, 'karma'])->name('thread.karma');
 
-    Route::get('/group/edit/{id}', [App\Http\Controllers\GroupController::class, 'edit'])->name('group.edit');
+    Route::post('/request/membership', [App\Http\Controllers\RequestController::class, 'member'])->name('request.membership');
+});
 
-    Route::put('/group/update/{id}', [App\Http\Controllers\GroupController::class, 'update'])->name('group.update');
+Route::middleware(['auth', 'member'])->group(function () {
 
-    Route::get('/groups/{id}/members', [App\Http\Controllers\GroupController::class, 'members'])->name('group.members');
+    Route::get('/groups/{id}/request-moderator', [App\Http\Controllers\RequestController::class, 'showModeratorRequestForm'])->name('moderator-form');
 
-    Route::get('/groups/{id}/requests', [App\Http\Controllers\RequestController::class, 'index'])->name('group.requests');
+    Route::post('/request/moderator/{id}', [App\Http\Controllers\RequestController::class, 'moderator'])->name('request.moderator');
+
+});
+
+Route::middleware(['auth', 'moderator'])->group(function () {
 
     Route::get('/groups/{id1}/thread/{id2}', [App\Http\Controllers\ThreadController::class, 'index'])->name('thread');
 
@@ -52,19 +64,37 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/request/{id}/accept', [App\Http\Controllers\RequestController::class, 'accept'])->name('request.accept');
 
-    Route::get('/groups/{id}/request-membership', [App\Http\Controllers\RequestController::class, 'showMembershipRequestForm'])->name('membership-form');
+    Route::get('/groups/{id}/requests', [App\Http\Controllers\RequestController::class, 'index'])->name('group.requests');
 
-    Route::post('/request/membership', [App\Http\Controllers\RequestController::class, 'member'])->name('request.membership');
+    Route::get('/groups/{id}/boot/{member}', [App\Http\Controllers\GroupController::class, 'boot'])->name('group.boot');
 
-    Route::get('/groups/{id}/request-moderator', [App\Http\Controllers\RequestController::class, 'showModeratorRequestForm'])->name('moderator-form');
-
-    Route::post('/request/moderator', [App\Http\Controllers\RequestController::class, 'moderator'])->name('request.moderator');
 });
 
+Route::middleware(['auth', 'spravce'])->group(function () {
+
+    Route::get('/group/edit/{id}', [App\Http\Controllers\GroupController::class, 'edit'])->name('group.edit');
+
+    Route::put('/group/update/{id}', [App\Http\Controllers\GroupController::class, 'update'])->name('group.update');
+
+    Route::get('/groups/{id}/unmod/{member}', [App\Http\Controllers\GroupController::class, 'unmod'])->name('group.unmod');
+
+    Route::get('/group/delete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('group.delete');
+
+});
+
+Route::middleware(['profil'])->group(function () {
+
+    Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);
+
+});
+
+Route::middleware(['members.list'])->group(function () {
+
+    Route::get('/groups/{id}/members', [App\Http\Controllers\GroupController::class, 'members'])->name('group.members');
+
+});
 
 Route::get('/groups', [App\Http\Controllers\GroupController::class, 'index'])->name('groups');
-
-Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class, 'show']);
 
 Route::get('/groups/{id}', [App\Http\Controllers\GroupController::class, 'view'])->name('group.view');
 
