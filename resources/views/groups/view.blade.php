@@ -89,7 +89,7 @@
                             @foreach($threads as $thread)
                                 <tr>
                                     <td>
-                                        <a class="nav-link" href="{{ route('thread', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}">
+                                        <a class="nav-link" href="{{ route('thread', ['id' => $thread->soucast, 'id2' => $thread->id]) }}">
                                             {{ $thread->nazev }}
                                         </a>
                                     </td>

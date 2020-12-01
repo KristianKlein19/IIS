@@ -50,19 +50,19 @@ Route::middleware(['auth', 'member'])->group(function () {
 
     Route::post('/request/moderator/{id}', [App\Http\Controllers\RequestController::class, 'moderator'])->name('request.moderator');
 
-    Route::post('/group/{id1}/thread/{id2}/store', [App\Http\Controllers\ThreadController::class, 'store'])->name('thread.store');
+    Route::post('/group/{id}/thread/{id2}/store', [App\Http\Controllers\ThreadController::class, 'store'])->name('thread.store');
 
     Route::get('/group/{id}/thread/make', [App\Http\Controllers\ThreadController::class, 'make'])->name('thread.make');
 
     Route::post('/group/{id}/thread/save', [App\Http\Controllers\ThreadController::class, 'save'])->name('thread.save');
 
-    Route::post('/group/{id1}/thread/{id2}/karma', [App\Http\Controllers\ThreadController::class, 'karma'])->name('thread.karma');
+    Route::post('/group/{id}/thread/{id2}/karma', [App\Http\Controllers\ThreadController::class, 'karma'])->name('thread.karma');
 
 });
 
 Route::middleware(['auth', 'moderator'])->group(function () {
 
-    Route::get('/groups/{id1}/thread/{id2}', [App\Http\Controllers\ThreadController::class, 'index'])->name('thread');
+    Route::get('/groups/{id}/thread/{id2}', [App\Http\Controllers\ThreadController::class, 'index'])->name('thread');
 
     Route::get('groups/{id}/requests/{id2}/reject', [App\Http\Controllers\RequestController::class, 'reject'])->name('request.reject');
 
@@ -100,7 +100,7 @@ Route::middleware(['members.list'])->group(function () {
 
 Route::middleware(['posts'])->group(function () {
 
-    Route::get('/groups/{id1}/thread/{id2}', [App\Http\Controllers\ThreadController::class, 'view'])->name('thread');
+    Route::get('/groups/{id}/thread/{id2}', [App\Http\Controllers\ThreadController::class, 'view'])->name('thread');
 
 });
 
