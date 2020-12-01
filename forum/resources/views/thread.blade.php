@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card" style="border-width:5px">
 
                     <div class="card-header" style="text-align:center"><b>{{ $thread->nazev }}</b></div>
                     <div class="card-body">{{ $thread->popis }}</div>
