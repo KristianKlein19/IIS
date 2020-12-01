@@ -21,47 +21,48 @@
 	<dt>Autoři</dt>
 	<dd>Klein Kristián <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
 	    <a href="mailto:xklein19@stud.fit.vutbr.cz">xklein19@stud.fit.vutbr.cz</a> -
-		popis činnosti v týmu
+		Team management, zakladný setup projektu(inštalácia balíčkov a závislostí), generovanie autentifikácie, tvorba funkcionality a views pre skupiny, inštalácia projektu na hosting server.
 	</dd>
 	<dd>Pavlovič Andrej <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
 	    <a href="mailto:xpavlo14@stud.fit.vutbr.cz">xpavlo14@stud.fit.vutbr.cz</a> -
-		popis činnosti v týmu
+		Dátový návrh a tvorba ER diagramu a SQL skriptu pre generovanie migrácií, tvorba modelov ,seedrov a factories, funkcionalita a views pre vlákna a ich príspevky.
 	</dd>
   <dd>Nevídal Jakub <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
 	    <a href="mailto:xnevid02@stud.fit.vutbr.cz">xnevid02@stud.fit.vutbr.cz</a> -
-		Správa uživatelů, middleware (zabezpečení url),
+		Dátový návrh a tvorba ER diagramu, celková správa užívateľov, tvorba middleware (zabezpečení url), tvorba funkcionality a views pre profily užívateľov a tvorba funkcionality a views pre vybavovanie žiadostí.
 	</dd>
 	<dt>URL aplikace</dt>
-	<dd><a href="http://www.stud.fit.vutbr.cz/~xautor01/IIS">http://www.stud.fit.vutbr.cz/~xautor01/IIS</a></dd>
-	<dd>(pokud má aplikace více vstupních stránek, napište obdobně další URL)</dd>
+	<dd><a href="https://iis-forum.azurewebsites.net">https://iis-forum.azurewebsites.net</a></dd>
 </dl>
 
 <h2>Uživatelé systému pro testování</h2>
-<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<p>Týchto užívateľov sme naseedovali manuálne. Slúžia ako testovacie dáta našej aplikácie a základných rol definovaných v zadaní. (prípady užitia)</strong>.</p>
 <table>
 <tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
 <tr><td>admin@example.com</td><td>heslo789</td><td>Administrátor</td></tr>
 <tr><td>owner@example.com</td><td>heslo456</td><td>Správce</td></tr>
-<tr><td>moderator@example.com</td><td>heslo123</td><td>Moderátor</td></tr>
-<tr><td>admin@example.com</td><td>heslo000</td><td>Člen</td></tr>
+<tr><td>mod@example.com</td><td>heslo123</td><td>Moderátor</td></tr>
+<tr><td>member@example.com</td><td>heslo000</td><td>Člen</td></tr>
+<tr><td>user@example.com</td><td>password</td><td>Registrovaný užívateľ</td></tr>
 </table>
 
-<p>(Diagram případů užití není nutné vkládat, pokud IS implementuje role a případy užití definované zadáním.)</p>
+<p>Diagram prípadu užití neuvádzame, z hľadiska implementácie daných prípadu užitia uvedených v zadaní.</p>
 
 <h2>Implementace</h2>
 <p>Stručná dokumentace k implementaci, která popisuje, které části projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
 
 <h3>Databáze</h3>
 
-Zde vložte grafické schéma relační databáze (tabulek v databázi).
+<img src="DatabaseSchema.png" width="300" height="500">
 
 <h2>Instalace</h2>
 
-Stručně popište:
 <ul>
-<li>postup instalace na server,</li>
-<li>softwarové požadavky (verze PHP apod.),</li>
-<li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
+<li>Pre hosting server sme si vybrali tool Web App + MySQL od Microsoft Azure, z hľadiska, že máme na Azure študentský účet a taktiež, že je pre nás dostupný vstupný príspevok na softvér od Microsoftu.
+    Inštalácia na server spočívala v tom, že sme si najprv nakonfigurovali základné nastavenia serveru a taktiež MySQL databázového serveru (v prípade serveru jeho názov a jeho lokáciu a v prípade databázového serveru názov, admin login name a heslo) Z výkonnostného hľadiska DB sme nastavovali pamäť a výkon.</li>
+<li>Hosting server požaduje PHP verziu 7.4 a vyššie. Databázový server zas MySQL verziu 5.7</li>
+<li>Ďalej sme pri inštalácii dopĺňali extension Composer pre správne fungovanie Laravel projektu. Hosting server sme prepojili s naším repozitárom na GitHube a teda sa každá zmena v branchi main ihneď premietne na server. Najdôležitejšou úlohou bolo upravovanie súboru .env, kde sme definovali potrebné závislosti medzi našou aplikáciou a hosting serverom(DB_HOST, Database name, User name/password a pod.).
+    Tabuľky na databázovom servery sme vytvorili pomocou migrácií v našej aplikácii a príkazu php artisan migrate</li>
 </ul>
 
 <h2>Známé problémy</h2>
