@@ -57,18 +57,10 @@
                                                         <tr>
                                                             <td style="text-align:center">
                                                                 <span style="float: left">
-                                                                    <a href="{{ route('thread.karma', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-success">
-
-                                                                            +
-
-                                                                    </a>
+                                                                    <a href="{{ route('thread.karma', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-success">+</a>
                                                                 </span>
                                                                 <span style="float: right">
-                                                                    <a href="{{ route('thread.karma', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-danger">
-                                                                        <span class="glyphicon glyphicon-info">
-                                                                            -
-                                                                        </span>
-                                                                    </a>
+                                                                    <a href="{{ route('thread.karma', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-danger">-</a>
                                                                 </span>
                                                             </td>
                                                         </tr>
