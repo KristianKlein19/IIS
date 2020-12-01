@@ -23,6 +23,15 @@
                                 <td>
                                     <b>Owner</b>
                                 </td>
+                                <td>
+                                    @if (auth()->user()->isAdmin())
+                                        <a href="{{ route('group.takeover', ['id' => $skupina->id]) }}" class="btn btn-xs btn-warning">
+                                            <span class="glyphicon glyphicon-warning">
+                                                Take Over
+                                            </span>
+                                        </a>
+                                    @endif
+                                </td>
                             </tr>
 
                             @foreach($userlist as $clen)
@@ -41,7 +50,7 @@
                                         @if ($clen->getUser()->isModFor($skupina))
                                             @if (auth()->user() == $skupina->getAdmin() || auth()->user()->isAdmin())
                                                 <a href="{{ route('group.unmod', ['id' => $skupina->id, 'member' => $clen->getUser()->id]) }}" class="btn btn-xs btn-warning">
-                                                    <span class="glyphicon glyphicon-success">
+                                                    <span class="glyphicon glyphicon-warning">
                                                         Remove Moderator
                                                     </span>
                                                 </a>

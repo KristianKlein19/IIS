@@ -120,7 +120,8 @@ class GroupController extends Controller
     {
         $skupina = Skupina::find($id);
 
-        $skupina->delete();
+        if ($skupina != null)
+            $skupina->delete();
 
         return redirect()->route('groups');
     }
@@ -142,6 +143,16 @@ class GroupController extends Controller
 
     public function unmod($group, $user) {
         Moderator::all()->where('id_skupina', $group)->where('id_users', $user)->first()->delete();
+
+        return redirect()->back();
+    }
+
+    public function takeOver($group) {
+        $skupina = Skupina::find($group);
+
+        $skupina->spravce = auth()->user()->id;
+
+        $skupina->save();
 
         return redirect()->back();
     }

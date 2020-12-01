@@ -25,6 +25,8 @@ Route::middleware(['auth', 'admin'])->group(function() {
     Route::get('/users', [App\Http\Controllers\UserListController::class, 'index'])->name('userlist');
 
     Route::get('/users/{id}/ban', [App\Http\Controllers\UserListController::class, 'ban'])->name('users.ban');
+
+    Route::get('/group/{id}/takeover', [App\Http\Controllers\GroupController::class, 'takeOver'])->name('group.takeover');
 });
 
 Route::middleware(['auth'])->group(function () {
@@ -36,8 +38,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/group/create', [App\Http\Controllers\GroupController::class, 'create'])->name('group.create');
 
     Route::post('/group/store', [App\Http\Controllers\GroupController::class, 'store'])->name('group.store');
-
-    Route::get('/group/delete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('group.delete');
 
     Route::get('/groups/{id}/request-membership', [App\Http\Controllers\RequestController::class, 'showMembershipRequestForm'])->name('membership-form');
 
@@ -71,6 +71,8 @@ Route::middleware(['auth', 'spravce'])->group(function () {
     Route::put('/group/update/{id}', [App\Http\Controllers\GroupController::class, 'update'])->name('group.update');
 
     Route::get('/groups/{id}/unmod/{member}', [App\Http\Controllers\GroupController::class, 'unmod'])->name('group.unmod');
+
+    Route::get('/group/delete/{id}', [App\Http\Controllers\GroupController::class, 'destroy'])->name('group.delete');
 
 });
 
