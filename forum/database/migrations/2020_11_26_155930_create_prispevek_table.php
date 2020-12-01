@@ -19,7 +19,7 @@ class CreatePrispevekTable extends Migration
             $table->string('text', 10000);
             $table->unsignedBigInteger('soucast')->index('soucast'); // foreign key
             $table->unsignedBigInteger('odpoved')->nullable()->index('odpoved'); // foreign key
-            $table->unsignedBigInteger('prispevatel')->index('prispevatel'); // foreign key
+            $table->unsignedBigInteger('prispevatel')->nullable()->index('prispevatel'); // foreign key
             $table->timestamps();
         });
     }

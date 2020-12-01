@@ -12,7 +12,7 @@
                             <thead>
                                 <th>Nickname</th>
                                 <th>e-mail</th>
-                                <th>admin</th>
+                                <th>action</th>
                             </thead>
                             <tbody>
                                 @foreach($userlist as $user)
@@ -25,9 +25,13 @@
                                         </td>
                                         <td>
                                             @if ($user->admin)
-                                                <b>Yes<b/>
+                                                <b>Admin<b/>
                                             @else
-                                                No
+                                            <a href="{{ route('users.ban', ['id' => $user->id]) }}" class="btn btn-xs btn-danger">
+                                                <span class="glyphicon glyphicon-trash">
+                                                    Ban
+                                                </span>
+                                            </a>
                                             @endif
                                         </td>
                                     </tr>

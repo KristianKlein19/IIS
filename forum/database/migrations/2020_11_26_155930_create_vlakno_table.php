@@ -20,7 +20,7 @@ class CreateVlaknoTable extends Migration
             $table->tinyInteger('stav');
             $table->tinyInteger('pripnute_vlakno');
             $table->unsignedBigInteger('soucast')->index('soucast'); // foreign key
-            $table->unsignedBigInteger('zakladatel')->index('zakladatel'); // foreign key
+            $table->unsignedBigInteger('zakladatel')->nullable()->index('zakladatel'); // foreign key
             $table->timestamps();
         });
     }
