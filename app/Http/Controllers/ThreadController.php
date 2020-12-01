@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCommentRequest;
+use App\Http\Requests\CreateThreadRequest;
 use App\Models\Prispevek;
 use App\Models\Skupina;
 use App\Models\User;
 use App\Models\Vlakno;
 use Database\Seeders\SkupinaSeeder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ThreadController extends Controller
 {
@@ -120,5 +122,28 @@ class ThreadController extends Controller
     public function view($group, $thread)
     {
         return view('thread')->with('shares', Prispevek::all())->with('thread', Vlakno::find($thread))->with('users', User::all())->with('group', Skupina::find($group));
+    }
+
+    public function make($group)
+    {
+        return view('thread-make')->with('group', Skupina::find($group));
+    }
+
+    public function save(CreateThreadRequest $request)
+    {
+        $vlakno = Vlakno::Create([
+            'nazev' => $request->nazev,
+            'popis' => $request->popis,
+            'stav' => 0,
+            'pripnute_vlakno' => 0,
+            'soucast' => $request->group_id,
+            'zakladatel' => auth()->user()->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        session()->flash('success', 'Thread was successfully created');
+
+        return redirect()->route('thread', ['id1' => $request->group_id, 'id2' => $vlakno->id]);
     }
 }

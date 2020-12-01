@@ -49,8 +49,22 @@
                                     </span>
                                 </a>
                             @endif
-                        </div>
-                    @endif
+
+                            @foreach($users as $user)
+                                @if($user->id == auth()->user()->getAuthIdentifier())
+                                    <?php $authUserId = $user->id ?>
+                                    @break
+                                @endif
+                            @endforeach
+                            @if(auth()->user()->isMember($skupina) || auth()->user()->isModFor($skupina) || $authUserId == $skupina->spravce)
+                                <a href="{{ route('thread.make', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info" style="float:right">
+                                    <span class="glyphicon glyphicon-info">
+                                        Create thread
+                                    </span>
+                                </a>
+                            @endif
+                        @endif
+                    </div>
                 </div>
 
                 @php

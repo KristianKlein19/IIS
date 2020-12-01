@@ -52,6 +52,10 @@ Route::middleware(['auth', 'member'])->group(function () {
 
     Route::post('/group/{id1}/thread/{id2}/store', [App\Http\Controllers\ThreadController::class, 'store'])->name('thread.store');
 
+    Route::get('/group/{id}/thread/make', [App\Http\Controllers\ThreadController::class, 'make'])->name('thread.make');
+
+    Route::post('/group/{id}/thread/save', [App\Http\Controllers\ThreadController::class, 'save'])->name('thread.save');
+
     Route::post('/group/{id1}/thread/{id2}/karma', [App\Http\Controllers\ThreadController::class, 'karma'])->name('thread.karma');
 
 });
