@@ -54,7 +54,7 @@ class ThreadController extends Controller
 
         session()->flash('success', 'Comment was successfully added');
 
-        return redirect()->route('thread', ['id1' => $request->group_id, 'id2' => $request->thread_id]);
+        return redirect()->route('thread', ['id' => $request->group_id, 'id2' => $request->thread_id]);
     }
 
     public function karma(CreateCommentRequest $request)
@@ -71,7 +71,7 @@ class ThreadController extends Controller
 
         session()->flash('success', 'Comment was successfully added');
 
-        return redirect()->route('thread', ['id1' => $request->group_id, 'id2' => $request->thread_id]);
+        return redirect()->route('thread', ['id' => $request->group_id, 'id2' => $request->thread_id]);
     }
 
     /**
@@ -144,6 +144,6 @@ class ThreadController extends Controller
 
         session()->flash('success', 'Thread was successfully created');
 
-        return redirect()->route('thread', ['id1' => $request->group_id, 'id2' => $vlakno->id]);
+        return redirect()->route('thread', ['id' => $request->group_id, 'id2' => $vlakno->id]);
     }
 }

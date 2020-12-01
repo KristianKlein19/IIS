@@ -55,10 +55,10 @@
                                                 <tr>
                                                     <td style="text-align:center">
                                                         <span style="float: left">
-                                                            <a href="{{ route('thread.karma', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-success">+</a>
+                                                            <a href="{{ route('thread.karma', ['id' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-success">+</a>
                                                         </span>
                                                         <span style="float: right">
-                                                            <a href="{{ route('thread.karma', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-danger">-</a>
+                                                            <a href="{{ route('thread.karma', ['id' => $thread->soucast, 'id2' => $thread->id]) }}" class="btn btn-danger">-</a>
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -92,7 +92,7 @@
                         <div class="card">
                             <div class="card-header">{{ __('Add Comment') }}</div>
                             <div class="card-body">
-                                <form action="{{ route('thread.store', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" method="POST">
+                                <form action="{{ route('thread.store', ['id' => $thread->soucast, 'id2' => $thread->id]) }}" method="POST">
                                     @csrf
                                     <div class="form-text">
                                         <textarea name="text" id="text" cols="5" rows="5" class="form-control"></textarea>
