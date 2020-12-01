@@ -146,4 +146,20 @@ class ThreadController extends Controller
 
         return redirect()->route('thread', ['id' => $request->group_id, 'id2' => $vlakno->id]);
     }
+
+    public function delete($group, $id) {
+        $thread = Vlakno::find($id);
+        if ($thread != null)
+            $thread->delete();
+
+        return redirect()->route('group.view', ['id' => $group]);
+    }
+
+    public function removeComment($group, $id) {
+        $comment = Prispevek::find($id);
+        if ($comment != null)
+            $comment->delete();
+
+        return redirect()->back();
+    }
 }

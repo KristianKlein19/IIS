@@ -72,6 +72,10 @@ Route::middleware(['auth', 'moderator'])->group(function () {
 
     Route::get('/groups/{id}/boot/{member}', [App\Http\Controllers\GroupController::class, 'boot'])->name('group.boot');
 
+    Route::get('/groups/{id}/delete-comment/{comment}', [App\Http\Controllers\ThreadController::class, 'removeComment'])->name('thread.deleteComment');
+
+    Route::get('/groups/{id}/delete-thread/{thread}', [App\Http\Controllers\ThreadController::class, 'delete'])->name('thread.deleteThread');
+
 });
 
 Route::middleware(['auth', 'spravce'])->group(function () {
