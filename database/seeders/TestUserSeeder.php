@@ -19,27 +19,27 @@ class TestUserSeeder extends Seeder
         if (!$user) {
             User::create([
                 'name' => 'admin',
-                'email' => 'admin@admin',
-                'password' => Hash::make('password'),
+                'email' => 'admin@example.com',
+                'password' => Hash::make('heslo789'),
                 'admin' => true
             ]);
 
             User::create([
                 'name' => 'owner',
                 'email' => 'owner@example.com',
-                'password' => Hash::make('Heslo456')
+                'password' => Hash::make('heslo456')
             ]);
 
             User::create([
                 'name' => 'moderator',
                 'email' => 'mod@example.com',
-                'password' => Hash::make('password')
+                'password' => Hash::make('heslo123')
             ]);
 
             User::create([
                 'name' => 'member',
                 'email' => 'member@example.com',
-                'password' => Hash::make('password')
+                'password' => Hash::make('heslo000')
             ]);
 
             User::create([

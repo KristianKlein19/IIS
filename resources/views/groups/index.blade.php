@@ -13,10 +13,10 @@
                                 Group name
                             </th>
                             <th>
-                                Created
+                                Owner
                             </th>
                             <th>
-                                Updated
+                                Creation date
                             </th>
                         </thead>
 
@@ -27,10 +27,10 @@
                                         <a class="nav-link" href="/groups/{{ $skupina->id }}">{{ $skupina->nazev }}</a>
                                     </td>
                                     <td>
-                                        {{ $skupina->created_at}}
+                                        <a class="nav-link" href="/profiles/{{ $skupina->spravce }}">{{ $skupina->getAdmin()->name }}</a>
                                     </td>
                                     <td>
-                                        {{ $skupina->updated_at}}
+                                        {{ $skupina->created_at}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -57,7 +57,7 @@
                                 Updated
                             </th>
                         </thead>
-                        
+
                         <tbody>
                             @foreach($groups as $skupina)
                                 <tr>
