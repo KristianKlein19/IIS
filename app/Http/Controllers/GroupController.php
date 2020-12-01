@@ -54,6 +54,11 @@ class GroupController extends Controller
             'zabezpeceni_obsahu' => $request->has('zabezpeceni_obsahu')
         ]);
 
+        Clen::Create([
+            'id_users' => auth()->user()->id,
+            'id_skupina' => $skupina->id
+        ]);
+
         session()->flash('success', 'Group was successfully created');
 
         return redirect()->route('group.view', ['id' => $skupina->id]);

@@ -24,11 +24,11 @@
                         <ul>
                             <li>
                                 <input id="zabezpeceni_profilu" name="zabezpeceni_profilu" type="checkbox" @if ($skupina->zabezpeceni_profilu) checked @endif class="switch">
-                                <label for="zabezpeceni_profilu">Group Profile Visibility</label>
+                                <label for="zabezpeceni_profilu">Hide membership for non-members</label>
                             </li>
                             <li>
                                 <input id="zabezpeceni_obsahu" name="zabezpeceni_obsahu" type="checkbox" @if ($skupina->zabezpeceni_obsahu) checked @endif class="switch">
-                                <label for="zabezpeceni_obsahu">Content Visibility</label>
+                                <label for="zabezpeceni_obsahu">Hide discusion for non-members</label>
                             </li>
                         </ul>
                         <button type="submit" class="btn btn-success">Update Group Profile</button>
