@@ -79,6 +79,13 @@
                                                 @endif
                                             @endforeach
                                         </b>
+                                        @if(auth()->user()->isModFor($group))
+                                            <a href="{{ route('thread.deleteComment', ['id' => $group->id]) }}" class="btn btn-xs btn-warning" style="float:right;margin-left:10px">
+                                                <span class="glyphicon glyphicon-info">
+                                                    Delete
+                                                </span>
+                                            </a>
+                                        @endif
                                         <span style="font-size:10px; float:right;">at {{ $share->created_at }}</span>
                                     </div>
                                 </div>
