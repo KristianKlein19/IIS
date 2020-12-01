@@ -40,10 +40,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/group/store', [App\Http\Controllers\GroupController::class, 'store'])->name('group.store');
 
     Route::get('/groups/{id}/request-membership', [App\Http\Controllers\RequestController::class, 'showMembershipRequestForm'])->name('membership-form');
-    
-    Route::post('/group/{id1}/thread/{id2}/store', [App\Http\Controllers\ThreadController::class, 'store'])->name('thread.store');
-
-    Route::post('/group/{id1}/thread/{id2}/karma', [App\Http\Controllers\ThreadController::class, 'karma'])->name('thread.karma');
 
     Route::post('/request/membership', [App\Http\Controllers\RequestController::class, 'member'])->name('request.membership');
 });
@@ -53,6 +49,10 @@ Route::middleware(['auth', 'member'])->group(function () {
     Route::get('/groups/{id}/request-moderator', [App\Http\Controllers\RequestController::class, 'showModeratorRequestForm'])->name('moderator-form');
 
     Route::post('/request/moderator/{id}', [App\Http\Controllers\RequestController::class, 'moderator'])->name('request.moderator');
+
+    Route::post('/group/{id1}/thread/{id2}/store', [App\Http\Controllers\ThreadController::class, 'store'])->name('thread.store');
+
+    Route::post('/group/{id1}/thread/{id2}/karma', [App\Http\Controllers\ThreadController::class, 'karma'])->name('thread.karma');
 
 });
 
@@ -94,11 +94,15 @@ Route::middleware(['members.list'])->group(function () {
 
 });
 
+Route::middleware(['posts'])->group(function () {
+
+    Route::get('/groups/{id1}/thread/{id2}', [App\Http\Controllers\ThreadController::class, 'view'])->name('thread');
+
+});
+
 Route::get('/groups', [App\Http\Controllers\GroupController::class, 'index'])->name('groups');
 
 Route::get('/groups/{id}', [App\Http\Controllers\GroupController::class, 'view'])->name('group.view');
-
-Route::get('/groups/{id1}/thread/{id2}', [App\Http\Controllers\ThreadController::class, 'view'])->name('thread');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

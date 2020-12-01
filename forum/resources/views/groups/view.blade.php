@@ -53,19 +53,25 @@
                     </div>
                 </div>
 
-                @if (auth()->user() != null)
-                    @if ($skupina->zabezpeceni_obsahu == 0 || auth()->user()->isMember($skupina))
-                        <table class="table table-hover">
-                            <thead>
+                @php
+                    if (auth()->user() == null)
+                        $member = false;
+                    else
+                        $member = auth()->user()->isMember($skupina);
+                @endphp
+
+                @if ($skupina->zabezpeceni_obsahu == 0 || $member)
+                    <table class="table table-hover">
+                        <thead>
                             <th>
                                 Threads
                             </th>
                             <th style="text-align:right">
                                 From
                             </th>
-                            </thead>
+                        </thead>
 
-                            <tbody>
+                        <tbody>
                             @foreach($threads as $thread)
                                 <tr>
                                     <td>
@@ -76,18 +82,17 @@
                                     <td style="text-align:right">
                                         @foreach($users as $user)
                                             @if($user->id == $thread->zakladatel)
-                                                {{ $user->name }}
-                                                @break
+                                               {{ $user->name }}
+                                               @break
                                             @endif
                                         @endforeach
-                                    </td>
+                                   </td>
                                 </tr>
                             @endforeach
-                            </tbody>
-                        </table>
-                    @else
-                        <div class="container py-4" style="text-align:center;color:#ff0000">This group's content is private and you are not member. You can request join to the group.</div>
-                    @endif
+                        </tbody>
+                    </table>
+                @else
+                    <div class="container py-4" style="text-align:center;color:#ff0000">This group's content is private and you are not member. You can request join to the group.</div>
                 @endif
             </div>
         </div>

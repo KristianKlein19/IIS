@@ -17,7 +17,7 @@ class GroupPosts
      */
     public function handle(Request $request, Closure $next)
     {
-        $group = Skupina::find($request->route('id'));
+        $group = Skupina::find($request->route('id1'));
         if ($group->zabezpeceni_obsahu == 0)
             return $next($request);
         elseif (auth()->user() == null)
