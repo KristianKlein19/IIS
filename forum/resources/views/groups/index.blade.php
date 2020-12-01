@@ -45,15 +45,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                    44
                 </div>
-                33
             </div>
-            22
         </div>
-        11
     </div>
-    00
 @else
     <div class="container">
         <div class="panel panel-default">

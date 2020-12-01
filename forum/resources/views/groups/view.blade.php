@@ -67,6 +67,7 @@
                                         @foreach($users as $user)
                                             @if($user->id == $thread->zakladatel)
                                                 {{ $user->name }}
+                                                @break
                                             @endif
                                         @endforeach
                                     </td>

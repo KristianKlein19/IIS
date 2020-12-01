@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prispevek;
+use App\Models\User;
+use App\Models\Vlakno;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
@@ -13,7 +16,7 @@ class ThreadController extends Controller
      */
     public function index()
     {
-        return view('thread');
+        //
     }
 
     /**
@@ -80,5 +83,10 @@ class ThreadController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function view($group, $thread)
+    {
+        return view('thread')->with('shares', Prispevek::all())->with('thread', Vlakno::find($thread))->with('users', User::all());
     }
 }

@@ -64,6 +64,8 @@ Route::get('/profiles/{user_id}', [App\Http\Controllers\ProfileController::class
 
 Route::get('/groups/{id}', [App\Http\Controllers\GroupController::class, 'view'])->name('group.view');
 
+Route::get('/groups/{id1}/thread/{id2}', [App\Http\Controllers\ThreadController::class, 'view'])->name('thread');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //TODO Route::resource('/password/reset', 'ResetPasswordController');
