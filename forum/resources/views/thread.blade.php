@@ -87,27 +87,28 @@
                 @endif
 
                 <br><br>
-
-                <div class="card">
-                    <div class="card-header">{{ __('Add Comment') }}</div>
-
-                    <div class="card-body">
-                        <form action="{{ route('thread.store', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" method="POST">
-                            @csrf
-                            <div class="form-text">
-                                <textarea name="text" id="text" cols="5" rows="5" class="form-control"></textarea>
+                @if (auth()->user() != null)
+                    @if (auth()->user()->isMember($group))
+                        <div class="card">
+                            <div class="card-header">{{ __('Add Comment') }}</div>
+                            <div class="card-body">
+                                <form action="{{ route('thread.store', ['id1' => $thread->soucast, 'id2' => $thread->id]) }}" method="POST">
+                                    @csrf
+                                    <div class="form-text">
+                                        <textarea name="text" id="text" cols="5" rows="5" class="form-control"></textarea>
+                                    </div>
+                                    <br>
+                                    <input type="hidden" name="thread_id" id="thread_id" value="{{ $thread->id }}" />
+                                    <input type="hidden" name="group_id" id="group_id" value="{{ $thread->soucast }}" />
+                                    <button type="submit" class="btn btn-success">Add comment</button>
+                                </form>
+                                @if($errors->any())
+                                    {!! implode('', $errors->all('<div>:message</div>')) !!}
+                                @endif
                             </div>
-                            <br>
-                            <input type="hidden" name="thread_id" id="thread_id" value="{{ $thread->id }}" />
-                            <input type="hidden" name="group_id" id="group_id" value="{{ $thread->soucast }}" />
-                            <button type="submit" class="btn btn-success">Add comment</button>
-                        </form>
-                        @if($errors->any())
-                            {!! implode('', $errors->all('<div>:message</div>')) !!}
-                        @endif
-                    </div>
-                </div>
-                <br>
+                        </div>
+                    @endif
+                @endif
             </div>
         </div>
     </div>
