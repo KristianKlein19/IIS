@@ -21,7 +21,7 @@
 	<dt>Autoři</dt>
 	<dd>Klein Kristián <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
 	    <a href="mailto:xklein19@stud.fit.vutbr.cz">xklein19@stud.fit.vutbr.cz</a> -
-		Team management, zakladný setup projektu(inštalácia balíčkov a závislostí), generovanie autentifikácie, tvorba funkcionality a views pre skupiny, inštalácia projektu na hosting server.
+		Team management, zakladný setup projektu(inštalácia balíčkov a závislostí), generovanie autentifikácie, tvorba funkcionality a views pre skupiny, inštalácia projektu na hosting server, tvorba dokumentácie.
 	</dd>
 	<dd>Pavlovič Andrej <!-- Nahraďte skutečným jménem a e-mailem autora a popisem činnosti -->
 	    <a href="mailto:xpavlo14@stud.fit.vutbr.cz">xpavlo14@stud.fit.vutbr.cz</a> -
@@ -49,11 +49,35 @@
 <p>Diagram prípadu užití neuvádzame, z hľadiska implementácie daných prípadu užitia uvedených v zadaní.</p>
 
 <h2>Implementace</h2>
-<p>Stručná dokumentace k implementaci, která popisuje, které části projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
+<p>Pre implementáciu sme si vybrali jazych PHP s verziou 7.4 a vyššou a MVC framework Laravel, ktorý nám uľahčil začiatočnú tvorbu štruktúry. Využili sme príkaz <TT>php artisan ui vue --auth</TT> pre generovanie autentifikácie. Nakoľko sme v robili webovú aplikáciu v jazyku PHP prvý krát, dosť nám dané generovanie pomohlo zorientovať sa v danej štruktúre aplikácie. Tabuľky migrácií sme si vygenerovali pomocou <TT>.sql</TT> skriptu čo nám následne dosť ulahčilo prácu s dátami. Štruktúra aplikácie spočíva v tom, že jednotlivé modely komunikujú s tabuľkami migrácií a predávajú dáta controllerom. V controlleroch priebieha implementácia jedntolivých prípadov užitia.</p>
+
+<p> Administrátor spravuje užívateľov vo view userlist/index.blade.php pomocou skriptu UserListController.php .
+</p>
+<p> Zakladanie skupiny view groups/create.blade.php pomocou skriptu GroupController.php . User, ktorý vytvoril danú skupinu sa stáva aj jej správcom a má právo na upravovanie jej profilu a užívateľov vo view groups/edit.blade.php .
+</p>
+<p> Správca skupiny spravuje jednotlivých užívateľov vo view groups/members.blade.php pomocou skriptu GroupController.php .
+</p>
+<p> Užívateľ môže podávať žiadosť o prihlásenie sa do skupiny vo view request/membership.blade.php a takisto ak je členom skupiny môže podávať žiadosť o rolu moderátora vo view request/moderator.blade.php. Implementované je to všetko pomocou skriptu RequestController.php .
+</p>
+<p> Príjmať žiadosti môže len moderátor alebo správca (v prípade žiadosti o moderátorstvo) danej skupiny vo view request/index.blade.php pomocou skriptu RequestController.php .
+</p>
+<p> Každý registrovaný užívateľ si môže spravovať svoj profil a určovať jeho viditeľnosti vo view profile/edit.blade.php pomocou skriptu ProfileController.php .
+</p>
+<p> Člen skupiny má právo pridávať vlákna vo view groups/view.blade.php a view thread-make.blade.php a k nim príspevky vo view a thread.blade.php pomocoou skriptu ThreadController.php
+</p>
+<p> Moderátor môže taktiež mazať príspevky a vlákna iných užívateľov vo view thread-make.php pomocou skriptu ThreadController.php 
+</p>
+<p> Užívateľ si môže prehliatať jednotlivé vlákna a príspevky ak má nato právo vo view groups/view.blade.php a thread.blade.php pomocou skriptu ThreadController.php .
+</p>
+<p> Prehliadať profily iných užívateľov sa môžu na základe viditeľnosti daných profilov vo view profile/view.blade.php pomocou ProfileController.php .
+</p>
+<p> Neregistrovaný užívateľ má právo zobrazovať skupiny, vlákna a príspevky ktoré majú plnú viditeľnosť vo view groups/view.blade.php a thread.blade.php pomocou skriptu ThreadController.php .
+</p>
+
 
 <h3>Databáze</h3>
 
-<img src="DatabaseSchema.png" width="300" height="500">
+<img src="DatabaseSchema.png" width="531" height="526">
 
 <h2>Instalace</h2>
 
@@ -66,7 +90,7 @@
 </ul>
 
 <h2>Známé problémy</h2>
-<p>Zde popište, které body zadání nejsou implementovány a z jakého důvodu. Např. &bdquo;Z časových důvodů nebyla implementována správa uživatelů.&rdquo; Pomůžete tím zrychlit hodnocení, když neimplementované funkce nebudeme muset dlouze hledat.</p>
+<p>Hodnotenie príspevkov členmi danej skupiny nefunguje. Nemali sme dostatok času daný prípad užitia implementovať. </p>
 
 </body>
 </html>
