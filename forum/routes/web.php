@@ -23,6 +23,8 @@ Auth::routes();
 Route::middleware(['auth', 'admin'])->group(function() {
 
     Route::get('/users', [App\Http\Controllers\UserListController::class, 'index'])->name('userlist');
+
+    Route::get('/users/{id}/ban', [App\Http\Controllers\UserListController::class, 'ban'])->name('users.ban');
 });
 
 Route::middleware(['auth'])->group(function () {

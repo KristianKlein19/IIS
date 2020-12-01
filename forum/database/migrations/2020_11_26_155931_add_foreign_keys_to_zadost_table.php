@@ -15,7 +15,7 @@ class AddForeignKeysToZadostTable extends Migration
     {
         Schema::table('zadost', function (Blueprint $table) {
             $table->foreign('od', 'zadost_ibfk_1')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('do', 'zadost_ibfk_2')->references('id')->on('skupina')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            $table->foreign('do', 'zadost_ibfk_2')->references('id')->on('skupina')->onUpdate('RESTRICT')->onDelete('CASCADE');
         });
     }
 
