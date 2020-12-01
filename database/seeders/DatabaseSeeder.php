@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         //\App\Models\Hodnotil::factory(1000)->create();
         //\App\Models\Moderator::factory(20)->create();
         $this->call(TestUserSeeder::class);
+        $this->call(TestGroupSeeder::class);
     }
 }

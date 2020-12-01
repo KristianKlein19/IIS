@@ -11,8 +11,8 @@
                         {{ $skupina->popis }}
                     </div>
 
-                    <div class="card-footer">
-                        @if (auth()->user() != null)
+                    @if (auth()->user() != null)
+                        <div class="card-footer">
                             @if ($skupina->zabezpeceni_profilu == 0 || auth()->user()->isMember($skupina))
                                 <a href="{{ route('group.members', ['id' => $skupina->id]) }}" class="btn btn-xs btn-info">
                                     <span class="glyphicon glyphicon-info">
@@ -49,8 +49,8 @@
                                     </span>
                                 </a>
                             @endif
-                        @endif
-                    </div>
+                        </div>
+                    @endif
                 </div>
 
                 @php
