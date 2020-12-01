@@ -7,7 +7,6 @@
                 <div class="card">
                     <div class="card-header">{{ $user->name }}</div>
                     <div class="card-body">{{ $user->bio }}</div>
-                    <div class="card-footer">{{ $user->viditelnost }}</div>
                 </div>
             </div>
         </div>
