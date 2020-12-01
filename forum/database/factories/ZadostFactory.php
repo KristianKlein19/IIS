@@ -26,7 +26,7 @@ class ZadostFactory extends Factory
             'text' => $this->faker->sentence( rand(5, 10) ),
             'stav' => rand(0, 1),
             'od' => rand(1,50),
-            'do' => rand(1,50),
+            'do' => rand(1,10),
             'created_at' => now(),
             'updated_at' => now(),
         ];

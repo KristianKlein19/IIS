@@ -23,7 +23,7 @@ class SkupinaFactory extends Factory
     {
         return [
             'nazev' => $this->faker->sentence( rand(1,3) ),
-            'popis' => $this->faker->sentence( rand(0,25) ),
+            'popis' => $this->faker->sentence( rand(10,25) ),
             'zabezpeceni_profilu' => true,
             'zabezpeceni_obsahu' => true,
             'spravce' => rand(1,50),
