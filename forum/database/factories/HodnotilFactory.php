@@ -23,7 +23,7 @@ class HodnotilFactory extends Factory
     {
         return [
             'id_users' => rand(1,50),
-            'id_prispevek' => rand(1,50),
+            'id_prispevek' => rand(1,250),
             'hodnotil' => rand(0, 1),
             'created_at' => now(),
             'updated_at' => now(),

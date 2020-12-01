@@ -26,7 +26,7 @@ class VlaknoFactory extends Factory
             'popis' => $this->faker->sentence( rand(0,25) ),
             'stav' => false,
             'pripnute_vlakno' => false,
-            'soucast' => rand(1,50),
+            'soucast' => rand(1,10),
             'zakladatel' => rand(1,50),
             'created_at' => now(),
             'updated_at' => now(),

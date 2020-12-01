@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateGroupRequest extends FormRequest
+class CreateCommentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class CreateGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'nazev' => 'required|max:10000',
-            'popis' => 'required|max:100'
+            'text' => 'required'
         ];
     }
 }

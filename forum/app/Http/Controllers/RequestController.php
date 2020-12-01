@@ -21,6 +21,14 @@ class RequestController extends Controller
         $request = Zadost::find($id);
         $request->stav = 2;
         $request->save();
+
+        // "reject" all other request from the same user to group the same group'
+        $others = Zadost::all()->where('od', $request->od)->where('do', $request->do);
+        foreach ($others as $other) {
+            $other->stav = 2;
+            $other->save();
+        }
+
         return redirect()->back();
     }
 
@@ -41,8 +49,17 @@ class RequestController extends Controller
                 'id_skupina' => $request->do
             ]);
         }
+
         $request->stav = 1;
         $request->save();
+
+        // "accept" all other request from the same user to group the same group'
+        $others = Zadost::all()->where('od', $request->od)->where('do', $request->do);
+        foreach ($others as $other) {
+            $other->stav = 1;
+            $other->save();
+        }
+
         return redirect()->back();
     }
 
@@ -51,6 +68,9 @@ class RequestController extends Controller
     }
 
     public function member(MembershipRequest $form) {
+        if(auth()->user()->isMember(Skupina::find($form->skupina))) {
+            return redirect()->route('membership-form', ['id' => $form->skupina])->withErrors(['message' => 'you are already a member!']);
+        }
         Zadost::Create([
             'typ' => 0,
             'text' => $form->msg,
@@ -58,7 +78,7 @@ class RequestController extends Controller
             'do' => $form->skupina,
             'stav' => 0
         ]);
-        return redirect()->back();
+        return redirect()->route('group.view', ['id' => $form->skupina]);
     }
 
     public function showModeratorRequestForm($group_id) {
@@ -66,6 +86,9 @@ class RequestController extends Controller
     }
 
     public function moderator(MembershipRequest $form) {
+        if(auth()->user()->isModFor(Skupina::find($form->skupina))) {
+            return redirect()->route('moderator-form', ['id' => $form->skupina])->withErrors(['message' => 'you are already a moderator!']);
+        }
         Zadost::Create([
             'typ' => 1,
             'text' => $form->msg,
@@ -73,6 +96,6 @@ class RequestController extends Controller
             'do' => $form->skupina,
             'stav' => 0
         ]);
-        return redirect()->back();
+        return redirect()->route('group.view', ['id' => $form->skupina]);
     }
 }

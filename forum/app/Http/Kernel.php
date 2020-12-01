@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\GroupModerator;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,5 +64,11 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'admin' => \App\Http\Middleware\AdministratorPrivilegeCheck::class,
+        'moderator' => \App\Http\Middleware\GroupModerator::class,
+        'member' => \App\Http\Middleware\GroupMember::class,
+        'spravce' => \App\Http\Middleware\GroupAdministrator::class,
+        'profil' => \App\Http\Middleware\ProfileProtection::class,
+        'members.list' => \App\Http\Middleware\GroupMemberList::class,
+        'posts' => \App\Http\Middleware\GroupPosts::class
     ];
 }

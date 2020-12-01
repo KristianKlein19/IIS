@@ -19,7 +19,7 @@ class CreateSkupinaTable extends Migration
             $table->string('popis', 10000)->nullable();
             $table->tinyInteger('zabezpeceni_profilu');
             $table->tinyInteger('zabezpeceni_obsahu');
-            $table->unsignedBigInteger('spravce')->index('spravce'); // foreign key
+            $table->unsignedBigInteger('spravce')->nullable()->index('spravce'); // foreign key
             $table->timestamps();
         });
     }

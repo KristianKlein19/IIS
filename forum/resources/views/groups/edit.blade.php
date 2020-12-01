@@ -14,20 +14,20 @@
                         <div class="form-group">
                             <label for="nazev">Title</label>
 
-                            <input type="text" class="form-control" name="nazev" value="{{ $skupina->nazev }}">
+                            <input required maxlength="100" type="text" class="form-control" name="nazev" value="{{ $skupina->nazev }}">
                         </div>
                         <div class="form-group">
                             <label for="popis">Description</label>
 
-                            <textarea name="popis" id="popis" cols="5" rows="5" class="form-control">{{ $skupina->popis }}</textarea>
+                            <textarea required maxlength="10000" name="popis" id="popis" cols="5" rows="5" class="form-control">{{ $skupina->popis }}</textarea>
                         </div>
                         <ul>
                             <li>
-                                <input id="zabezpeceni_profilu" name="zabezpeceni_profilu" type="checkbox" value="{{ $skupina->zabezpeceni_profilu }}" class="switch">
+                                <input id="zabezpeceni_profilu" name="zabezpeceni_profilu" type="checkbox" @if ($skupina->zabezpeceni_profilu) checked @endif class="switch">
                                 <label for="zabezpeceni_profilu">Group Profile Visibility</label>
                             </li>
                             <li>
-                                <input id="zabezpeceni_obsahu" name="zabezpeceni_obsahu" type="checkbox" value="{{ $skupina->zabezpeceni_obsahu }}" class="switch">
+                                <input id="zabezpeceni_obsahu" name="zabezpeceni_obsahu" type="checkbox" @if ($skupina->zabezpeceni_obsahu) checked @endif class="switch">
                                 <label for="zabezpeceni_obsahu">Content Visibility</label>
                             </li>
                         </ul>
