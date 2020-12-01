@@ -17,7 +17,7 @@ class RequestController extends Controller
         return view('request.index')->with('requests', Zadost::all()->where('do', $group))->with('skupina', Skupina::find($group));
     }
 
-    public function reject($id) {
+    public function reject($group, $id) {
         $request = Zadost::find($id);
         $request->stav = 2;
         $request->save();
@@ -32,7 +32,7 @@ class RequestController extends Controller
         return redirect()->back();
     }
 
-    public function accept($id) {
+    public function accept($group, $id) {
         $request = Zadost::find($id);
 
         if ($request->typ == 0)
