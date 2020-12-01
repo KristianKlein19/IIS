@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCommentRequest;
 use App\Models\Prispevek;
+use App\Models\Skupina;
 use App\Models\User;
 use App\Models\Vlakno;
+use Database\Seeders\SkupinaSeeder;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
@@ -100,6 +102,6 @@ class ThreadController extends Controller
 
     public function view($group, $thread)
     {
-        return view('thread')->with('shares', Prispevek::all())->with('thread', Vlakno::find($thread))->with('users', User::all());
+        return view('thread')->with('shares', Prispevek::all())->with('thread', Vlakno::find($thread))->with('users', User::all())->with('group', Skupina::find($group));
     }
 }
