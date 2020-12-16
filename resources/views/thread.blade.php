@@ -17,12 +17,14 @@
                                 @endif
                             @endforeach
                         </b>
-                        @if(auth()->user()->isModFor($group))
-                            <a href="{{ route('thread.deleteThread', ['id' => $group->id, 'thread' => $thread->id]) }}" class="btn btn-xs btn-danger" style="float:right;margin-left:10px">
-                                <span class="glyphicon glyphicon-danger">
-                                    Delete
-                                </span>
-                            </a>
+                        @if(auth()->user())
+                            @if(auth()->user()->isModFor($group))
+                                <a href="{{ route('thread.deleteThread', ['id' => $group->id, 'thread' => $thread->id]) }}" class="btn btn-xs btn-danger" style="float:right;margin-left:10px">
+                                    <span class="glyphicon glyphicon-danger">
+                                        Delete
+                                    </span>
+                                </a>
+                            @endif
                         @endif
                         <span style="font-size:10px;float:right">at {{ $thread->created_at }}</span>
                     </div>
@@ -86,12 +88,14 @@
                                                 @endif
                                             @endforeach
                                         </b>
-                                        @if(auth()->user()->isModFor($group))
-                                            <a href="{{ route('thread.deleteComment', ['id' => $group->id, 'comment' => $share->id]) }}" class="btn btn-xs btn-danger" style="float:right;margin-left:10px">
-                                                <span class="glyphicon glyphicon-danger">
-                                                    Delete
-                                                </span>
-                                            </a>
+                                        @if(auth()->user())
+                                            @if(auth()->user()->isModFor($group))
+                                                <a href="{{ route('thread.deleteComment', ['id' => $group->id, 'comment' => $share->id]) }}" class="btn btn-xs btn-danger" style="float:right;margin-left:10px">
+                                                    <span class="glyphicon glyphicon-danger">
+                                                        Delete
+                                                    </span>
+                                                </a>
+                                            @endif
                                         @endif
                                         <span style="font-size:10px; float:right;">at {{ $share->created_at }}</span>
                                     </div>
